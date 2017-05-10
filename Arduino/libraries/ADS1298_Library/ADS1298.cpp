@@ -106,11 +106,11 @@ void ADS1298::startADS(void)
 }
 
 //write as binary each channel's 2 bytes of data
-void ADS1298::writeADSchannelData(byte TriggerWord, byte ADCWord)
+void ADS1298::writeADSchannelData(byte TriggerWord)
 {
 	//print rawChannelData array
 	byte Trigger = 0xF0 | TriggerWord;
-	byte ADCbyte = 0xF0 | ADCWord;
+	byte ADCbyte = 0xF0;
 	SerialUSB.write(ADCbyte);
 	SerialUSB.write(Trigger);
 	SerialUSB.write(bit24ChannelData, _NUMBEROFADS * _NUMBEROFBYTES);

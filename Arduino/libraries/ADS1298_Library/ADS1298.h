@@ -24,7 +24,7 @@ public:
 
 	void resetADS();
 	void startADS();
-	void writeADSchannelData(byte, byte);
+	void writeADSchannelData(byte);
 	void stopADS();
 
 	byte getDeviceID();

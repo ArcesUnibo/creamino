@@ -15,14 +15,8 @@ byte ModeADS[1];
 byte ADSNum[1];
 byte ChipSelect[1];
 byte TriggerWord[1];
-byte ADCWord[1];
 byte Gain[1];
 
-byte Stimulation[1];
-byte Amplitude[2];
-byte Frequency[2];
-byte DutyCycle[1];
-byte ONOFF[1];
 byte Synch[1] = {0xF0};
 
 boolean toggle = 0;
@@ -44,13 +38,9 @@ void setup() {
   SerialUSB.flush();
   delay(100);
 
-  Serial1.begin(9600);
-  Serial1.flush();
-
   pinMode(13, OUTPUT); // LED pin for debug
   digitalWrite(13, toggle);
   TriggerWord[0] = 0x00;  
-  ADCWord[0] = 0x00;
 }
 
 
@@ -102,10 +92,9 @@ void loop() {
   
   if(interrupt_pin2==1){
     ADS1298device.RDATA();
-    ADS1298device.writeADSchannelData(TriggerWord[0], ADCWord[0]);
+    ADS1298device.writeADSchannelData(TriggerWord[0]);
     interrupt_pin2 = 0;  
     TriggerWord[0] = 0x00;
-    ADCWord[0] = 0x00;
   }
   
   //Arduino Connection and ADC initialization
@@ -122,62 +111,13 @@ void loop() {
         delay(100);
         SerialUSB.flush();
       }
-
-    //Start Stimulation
-    if(ConnectingWord.equals("StartStimu")){
-        
-      toggle = !toggle;
-      digitalWrite(13, toggle);
-      
-      ONOFF[0] = Synch[0] | 0x01;
-      
-      while(!(SerialUSB.available()>5)); // Wait the Sample Rate
-      
-      SerialUSB.readBytes(Stimulation,1);
-      SerialUSB.readBytes(Amplitude,2);
-      SerialUSB.readBytes(Frequency,2);
-      SerialUSB.readBytes(DutyCycle,1);
-
-      Serial1.write(Synch,1);
-      Serial1.write(ONOFF,1);  
-      Serial1.write((byte*)Stimulation,1);
-      Serial1.write((byte*)Amplitude,2);
-      Serial1.write((byte*)Frequency,2);
-      Serial1.write((byte*)DutyCycle,1);
-      
-      }
-
-    //Stop Stimulation
-    if(ConnectingWord.equals("StopStimul")){
-
-      toggle = !toggle;
-      digitalWrite(13, toggle);
-      
-      ONOFF[0] = Synch[0] | 0x00;
-      Serial1.write(Synch,1);
-      Serial1.write(ONOFF,1);
-      Serial1.write((byte*)Stimulation,1);
-      Serial1.write((byte*)Amplitude,2);
-      Serial1.write((byte*)Frequency,2);
-      Serial1.write((byte*)DutyCycle,1);        
-    }
-
-      
     }
     
     if(Serial.available()){
       Serial.readBytes(TriggerWord,1);
       Serial.println(TriggerWord[0]);
-    }
-
-    if(Serial1.available()){
-      Serial1.readBytes(ADCWord,1);
-      //Serial1.println(TriggerWord[0]);
-    }
-
-    
+    }    
   }
-  
 }
 
 
