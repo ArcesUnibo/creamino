@@ -17,8 +17,6 @@ byte ChipSelect[1];
 byte TriggerWord[1];
 byte Gain[1];
 
-byte Synch[1] = {0xF0};
-
 boolean toggle = 0;
 String ConnectingWord;
 
