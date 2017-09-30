@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="829.0" prefWidth="1407.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creaminointerface.FXMLDocumentController">
+   <children>
+   
+   <!--    
+   <fx:include fx:id="LabelDialog" source="Label.fxml"/>
+   -->
+    
+    <AnchorPane id="AnchorPane" maxHeight="2216.0" maxWidth="2000.0" minHeight="649.0" minWidth="627.0" prefHeight="668.0" prefWidth="1334.0">
+        <children>
+            <MenuBar fx:id="Menu" layoutY="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="1407.0">
+                <menus>
+                    <Menu fx:id="File" mnemonicParsing="false" text="File">
+                        <items>
+                            <CheckMenuItem fx:id="Connect" mnemonicParsing="false" onAction="#handleMenuItemConnect" text="Connect" />
+                            <CheckMenuItem fx:id="Stimulation" mnemonicParsing="false" onAction="#handleMenuItemStimulation" text="tES" />
+                            <MenuItem fx:id="Close" mnemonicParsing="false" onAction="#handleMenuItemClose" text="Close" />
+                        </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Display">
+                        <items>
+                        <CheckMenuItem fx:id="full_size" mnemonicParsing="false" onAction="#handleMenuItemfullsize" text="Full Size" />
+                        <Menu mnemonicParsing="false" text="Displayed Points">
+                            <items>
+                                <CheckMenuItem fx:id="P100" mnemonicParsing="false" onAction="#handleMenuItemP100" selected="false" text="100 points" />
+                                <CheckMenuItem fx:id="P200" mnemonicParsing="false" onAction="#handleMenuItemP200" selected="false" text="200 points" />
+                                <CheckMenuItem fx:id="P300" mnemonicParsing="false" onAction="#handleMenuItemP300" selected="false" text="300 points" />
+                                <CheckMenuItem fx:id="P400" mnemonicParsing="false" onAction="#handleMenuItemP400" selected="false" text="400 points" />
+                                <CheckMenuItem fx:id="P500" mnemonicParsing="false" onAction="#handleMenuItemP500" selected="true" text="500 points" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Channels 1-8">
+                            <items>
+                                <CheckMenuItem fx:id="Channels1_8" mnemonicParsing="false" onAction="#handleMenuItemChannels" selected="false" text="Select All" />
+                                <CheckMenuItem fx:id="Channel1" mnemonicParsing="false" selected="true" text="Channel1" />
+                                <CheckMenuItem fx:id="Channel2" mnemonicParsing="false" selected="true" text="Channel2" />
+                                <CheckMenuItem fx:id="Channel3" mnemonicParsing="false" selected="true" text="Channel3" />
+                                <CheckMenuItem fx:id="Channel4" mnemonicParsing="false" selected="true" text="Channel4" />
+                                <CheckMenuItem fx:id="Channel5" mnemonicParsing="false" selected="true" text="Channel5" />
+                                <CheckMenuItem fx:id="Channel6" mnemonicParsing="false" selected="true" text="Channel6" />
+                                <CheckMenuItem fx:id="Channel7" mnemonicParsing="false" selected="true" text="Channel7" />
+                                <CheckMenuItem fx:id="Channel8" mnemonicParsing="false" selected="true" text="Channel8" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Channels 9-16">
+                            <items>
+                                <CheckMenuItem fx:id="Channels9_16" mnemonicParsing="false" onAction="#handleMenuItemChannels" selected="false" text="Select All" />
+                                <CheckMenuItem fx:id="Channel9" mnemonicParsing="false" selected="true" text="Channel9" />
+                                <CheckMenuItem fx:id="Channel10" mnemonicParsing="false" selected="true" text="Channel10" />
+                                <CheckMenuItem fx:id="Channel11" mnemonicParsing="false" selected="true" text="Channel11" />
+                                <CheckMenuItem fx:id="Channel12" mnemonicParsing="false" selected="true" text="Channel12" />
+                                <CheckMenuItem fx:id="Channel13" mnemonicParsing="false" selected="true" text="Channel13" />
+                                <CheckMenuItem fx:id="Channel14" mnemonicParsing="false" selected="true" text="Channel14" />
+                                <CheckMenuItem fx:id="Channel15" mnemonicParsing="false" selected="true" text="Channel15" />
+                                <CheckMenuItem fx:id="Channel16" mnemonicParsing="false" selected="true" text="Channel16" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Channels 17-24">
+                            <items>
+                                <CheckMenuItem fx:id="Channels17_24" mnemonicParsing="false" onAction="#handleMenuItemChannels" selected="flase" text="Select All" />
+                                <CheckMenuItem fx:id="Channel17" mnemonicParsing="false" selected="true" text="Channel17" />
+                                <CheckMenuItem fx:id="Channel18" mnemonicParsing="false" selected="true" text="Channel18" />
+                                <CheckMenuItem fx:id="Channel19" mnemonicParsing="false" selected="true" text="Channel19" />
+                                <CheckMenuItem fx:id="Channel20" mnemonicParsing="false" selected="true" text="Channel20" />
+                                <CheckMenuItem fx:id="Channel21" mnemonicParsing="false" selected="true" text="Channel21" />
+                                <CheckMenuItem fx:id="Channel22" mnemonicParsing="false" selected="true" text="Channel22" />
+                                <CheckMenuItem fx:id="Channel23" mnemonicParsing="false" selected="true" text="Channel23" />
+                                <CheckMenuItem fx:id="Channel24" mnemonicParsing="false" selected="true" text="Channel24" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Channels 25-32">
+                            <items>
+                                <CheckMenuItem fx:id="Channels25_32" mnemonicParsing="false" onAction="#handleMenuItemChannels" selected="false" text="Select All" />
+                                <CheckMenuItem fx:id="Channel25" mnemonicParsing="false" selected="true" text="Channel25" />
+                                <CheckMenuItem fx:id="Channel26" mnemonicParsing="false" selected="true" text="Channel26" />
+                                <CheckMenuItem fx:id="Channel27" mnemonicParsing="false" selected="true" text="Channel27" />
+                                <CheckMenuItem fx:id="Channel28" mnemonicParsing="false" selected="true" text="Channel28" />
+                                <CheckMenuItem fx:id="Channel29" mnemonicParsing="false" selected="true" text="Channel29" />
+                                <CheckMenuItem fx:id="Channel30" mnemonicParsing="false" selected="true" text="Channel30" />
+                                <CheckMenuItem fx:id="Channel31" mnemonicParsing="false" selected="true" text="Channel31" />
+                                <CheckMenuItem fx:id="Channel32" mnemonicParsing="false" selected="true" text="Channel32" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Channels 33-40">
+                            <items>
+                                <CheckMenuItem fx:id="Channels33_40" mnemonicParsing="false" onAction="#handleMenuItemChannels" selected="false" text="Select All" />   
+                                <CheckMenuItem fx:id="Channel33" mnemonicParsing="false" selected="true" text="Channel33" />
+                                <CheckMenuItem fx:id="Channel34" mnemonicParsing="false" selected="true" text="Channel34" />
+                                <CheckMenuItem fx:id="Channel35" mnemonicParsing="false" selected="true" text="Channel35" />
+                                <CheckMenuItem fx:id="Channel36" mnemonicParsing="false" selected="true" text="Channel36" />
+                                <CheckMenuItem fx:id="Channel37" mnemonicParsing="false" selected="true" text="Channel37" />
+                                <CheckMenuItem fx:id="Channel38" mnemonicParsing="false" selected="true" text="Channel38" />
+                                <CheckMenuItem fx:id="Channel39" mnemonicParsing="false" selected="true" text="Channel39" />
+                                <CheckMenuItem fx:id="Channel40" mnemonicParsing="false" selected="true" text="Channel40" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Channels 41-48">
+                            <items>
+                                <CheckMenuItem fx:id="Channels41_48" mnemonicParsing="false" onAction="#handleMenuItemChannels" selected="false" text="Select All" />
+                                <CheckMenuItem fx:id="Channel41" mnemonicParsing="false" selected="true" text="Channel41" />
+                                <CheckMenuItem fx:id="Channel42" mnemonicParsing="false" selected="true" text="Channel42" />
+                                <CheckMenuItem fx:id="Channel43" mnemonicParsing="false" selected="true" text="Channel43" />
+                                <CheckMenuItem fx:id="Channel44" mnemonicParsing="false" selected="true" text="Channel44" />
+                                <CheckMenuItem fx:id="Channel45" mnemonicParsing="false" selected="true" text="Channel45" />
+                                <CheckMenuItem fx:id="Channel46" mnemonicParsing="false" selected="true" text="Channel46" />
+                                <CheckMenuItem fx:id="Channel47" mnemonicParsing="false" selected="true" text="Channel47" />
+                                <CheckMenuItem fx:id="Channel48" mnemonicParsing="false" selected="true" text="Channel48" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Channels 49-56">
+                            <items>
+                                <CheckMenuItem fx:id="Channels49_56" mnemonicParsing="false" onAction="#handleMenuItemChannels" selected="flase" text="Select All" />
+                                <CheckMenuItem fx:id="Channel49" mnemonicParsing="false" selected="true" text="Channel49" />
+                                <CheckMenuItem fx:id="Channel50" mnemonicParsing="false" selected="true" text="Channel50" />
+                                <CheckMenuItem fx:id="Channel51" mnemonicParsing="false" selected="true" text="Channel51" />
+                                <CheckMenuItem fx:id="Channel52" mnemonicParsing="false" selected="true" text="Channel52" />
+                                <CheckMenuItem fx:id="Channel53" mnemonicParsing="false" selected="true" text="Channel53" />
+                                <CheckMenuItem fx:id="Channel54" mnemonicParsing="false" selected="true" text="Channel54" />
+                                <CheckMenuItem fx:id="Channel55" mnemonicParsing="false" selected="true" text="Channel55" />
+                                <CheckMenuItem fx:id="Channel56" mnemonicParsing="false" selected="true" text="Channel56" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Channels 57-64">
+                            <items>
+                                <CheckMenuItem fx:id="Channels57_64" mnemonicParsing="false" onAction="#handleMenuItemChannels" selected="false" text="Select All" />
+                                <CheckMenuItem fx:id="Channel57" mnemonicParsing="false" selected="true" text="Channel57" />
+                                <CheckMenuItem fx:id="Channel58" mnemonicParsing="false" selected="true" text="Channel58" />
+                                <CheckMenuItem fx:id="Channel59" mnemonicParsing="false" selected="true" text="Channel59" />
+                                <CheckMenuItem fx:id="Channel60" mnemonicParsing="false" selected="true" text="Channel60" />
+                                <CheckMenuItem fx:id="Channel61" mnemonicParsing="false" selected="true" text="Channel61" />
+                                <CheckMenuItem fx:id="Channel62" mnemonicParsing="false" selected="true" text="Channel62" />
+                                <CheckMenuItem fx:id="Channel63" mnemonicParsing="false" selected="true" text="Channel63" />
+                                <CheckMenuItem fx:id="Channel64" mnemonicParsing="false" selected="true" text="Channel64" />
+                            </items>
+                        </Menu>
+                            </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Set">
+                        <items>
+                            <MenuItem fx:id="Reference" mnemonicParsing="false" onAction="#handleMenuItemReference" text="Reference" />
+                            <MenuItem fx:id="SaveLabel" mnemonicParsing="false" onAction="#handleMenuItemSaveLabels" text="Save Labels" />
+                            <MenuItem fx:id="LoadLabel" mnemonicParsing="false" onAction="#handleMenuItemLoadLabels" text="Load Labels" />
+                        </items>
+                    </Menu>
+                </menus>
+            </MenuBar>
+        <!--
+        <ScrollPane layoutX="158.0" layoutY="76.0" prefHeight="3600.0" prefWidth="1011.0">
+        -->
+        <ScrollPane layoutX="195.0" layoutY="39.0" prefHeight="780.0" prefWidth="1134.0">
+            <content>
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="1639.0" prefWidth="1113.0">
+                    <children>
+                        <LineChart fx:id="Chart" alternativeRowFillVisible="false" animated="false" cacheShape="false" centerShape="false" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutX="31.0" layoutY="-7.0" legendVisible="false" minHeight="1653.0" minWidth="500.0" prefHeight="1656.0" prefWidth="1086.0" scaleShape="false" verticalGridLinesVisible="false" AnchorPane.topAnchor="-7.0">
+                            <xAxis>
+                                <NumberAxis fx:id="XAxis" animated="false" autoRanging="false" forceZeroInRange="false" minorTickVisible="false" tickLabelsVisible="false" tickMarkVisible="false" upperBound="50.0" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis fx:id="YAxis" animated="false" autoRanging="false" focusTraversable="false" forceZeroInRange="false" minorTickCount="0" minorTickLength="0.0" minorTickVisible="false" prefHeight="807.0" prefWidth="15.0" side="LEFT" tickLabelsVisible="false" tickMarkVisible="false" tickUnit="0.0" />
+                            </yAxis>
+                        </LineChart>
+                        <TextField fx:id="LabelCh1" layoutX="-1.0" layoutY="8.0" prefHeight="10.0" prefWidth="60.0" text="CH1" />
+                        <TextField fx:id="LabelCh2" layoutX="-1.0" layoutY="33.0" prefHeight="17.0" prefWidth="60.0" text="CH2" />
+                        <TextField fx:id="LabelCh3" layoutX="-1.0" layoutY="58.0" prefHeight="17.0" prefWidth="60.0" text="CH3" />
+                        <TextField fx:id="LabelCh4" layoutX="-1.0" layoutY="83.0" prefHeight="17.0" prefWidth="60.0" text="CH4" />
+                        <TextField fx:id="LabelCh5" layoutX="-1.0" layoutY="108.0" prefHeight="17.0" prefWidth="60.0" text="CH5" />
+                        <TextField fx:id="LabelCh6" layoutX="-1.0" layoutY="133.0" prefHeight="17.0" prefWidth="60.0" text="CH6" />
+                        <TextField fx:id="LabelCh7" layoutX="-1.0" layoutY="158.0" prefHeight="17.0" prefWidth="60.0" text="CH7" />
+                        <TextField fx:id="LabelCh8" layoutX="-1.0" layoutY="184.0" prefHeight="17.0" prefWidth="60.0" text="CH8" />
+                        <TextField fx:id="LabelCh9" layoutX="-1.0" layoutY="210.0" prefHeight="17.0" prefWidth="60.0" text="CH9" />
+                        <TextField fx:id="LabelCh10" layoutX="-1.0" layoutY="235.0" prefHeight="17.0" prefWidth="60.0" text="CH10" />
+                        <TextField fx:id="LabelCh11" layoutX="-1.0" layoutY="261.0" prefHeight="17.0" prefWidth="60.0" text="CH11" />
+                        <TextField fx:id="LabelCh12" layoutX="-1.0" layoutY="286.0" prefHeight="17.0" prefWidth="60.0" text="CH12" />
+                        <TextField fx:id="LabelCh13" layoutX="-1.0" layoutY="312.0" prefHeight="17.0" prefWidth="60.0" text="CH13" />
+                        <TextField fx:id="LabelCh14" layoutX="-1.0" layoutY="338.0" prefHeight="17.0" prefWidth="60.0" text="CH14" />
+                        <TextField fx:id="LabelCh15" layoutX="-1.0" layoutY="362.0" prefHeight="17.0" prefWidth="60.0" text="CH15" />
+                        <TextField fx:id="LabelCh16" layoutX="-1.0" layoutY="388.0" prefHeight="17.0" prefWidth="60.0" text="CH16" />
+                        <TextField fx:id="LabelCh17" layoutX="-1.0" layoutY="413.0" prefHeight="17.0" prefWidth="60.0" text="CH17" />
+                        <TextField fx:id="LabelCh18" layoutX="-1.0" layoutY="439.0" prefHeight="17.0" prefWidth="60.0" text="CH18" />
+                        <TextField fx:id="LabelCh19" layoutX="-1.0" layoutY="465.0" prefHeight="17.0" prefWidth="60.0" text="CH19" />
+                        <TextField fx:id="LabelCh20" layoutX="-1.0" layoutY="490.0" prefHeight="17.0" prefWidth="60.0" text="CH20" />
+                        <TextField fx:id="LabelCh21" layoutX="-1.0" layoutY="515.0" prefHeight="17.0" prefWidth="60.0" text="CH21" />
+                        <TextField fx:id="LabelCh22" layoutX="-1.0" layoutY="540.0" prefHeight="17.0" prefWidth="60.0" text="CH22" />
+                        <TextField fx:id="LabelCh23" layoutX="-1.0" layoutY="565.0" prefHeight="17.0" prefWidth="60.0" text="CH23" />
+                        <TextField fx:id="LabelCh24" layoutX="-1.0" layoutY="591.0" prefHeight="17.0" prefWidth="60.0" text="CH24" />
+                        <TextField fx:id="LabelCh25" layoutX="-1.0" layoutY="617.0" prefHeight="17.0" prefWidth="60.0" text="CH25" />
+                        <TextField fx:id="LabelCh26" layoutX="-1.0" layoutY="642.0" prefHeight="17.0" prefWidth="60.0" text="CH26" />
+                        <TextField fx:id="LabelCh27" layoutX="-1.0" layoutY="667.0" prefHeight="17.0" prefWidth="60.0" text="CH27" />
+                        <TextField fx:id="LabelCh28" layoutX="-1.0" layoutY="693.0" prefHeight="17.0" prefWidth="60.0" text="CH28" />
+                        <TextField fx:id="LabelCh29" layoutX="-1.0" layoutY="718.0" prefHeight="17.0" prefWidth="60.0" text="CH29" />
+                        <TextField fx:id="LabelCh30" layoutX="-1.0" layoutY="743.0" prefHeight="17.0" prefWidth="60.0" text="CH30" />
+                        <TextField fx:id="LabelCh31" layoutX="-1.0" layoutY="768.0" prefHeight="17.0" prefWidth="60.0" text="CH31" />
+                        <TextField fx:id="LabelCh32" layoutX="-1.0" layoutY="794.0" prefHeight="17.0" prefWidth="60.0" text="CH32" />
+                        <TextField fx:id="LabelCh33" layoutX="-1.0" layoutY="819.0" prefHeight="17.0" prefWidth="60.0" text="CH33" />
+                        <TextField fx:id="LabelCh34" layoutX="-1.0" layoutY="844.0" prefHeight="17.0" prefWidth="60.0" text="CH34" />
+                        <TextField fx:id="LabelCh35" layoutX="-1.0" layoutY="869.0" prefHeight="17.0" prefWidth="60.0" text="CH35" />
+                        <TextField fx:id="LabelCh36" layoutX="-1.0" layoutY="894.0" prefHeight="17.0" prefWidth="60.0" text="CH36" />
+                        <TextField fx:id="LabelCh37" layoutX="-1.0" layoutY="919.0" prefHeight="17.0" prefWidth="60.0" text="CH37" />
+                        <TextField fx:id="LabelCh38" layoutX="-1.0" layoutY="944.0" prefHeight="17.0" prefWidth="60.0" text="CH38" />
+                        <TextField fx:id="LabelCh39" layoutX="-1.0" layoutY="969.0" prefHeight="17.0" prefWidth="60.0" text="CH39" />
+                        <TextField fx:id="LabelCh40" layoutX="-1.0" layoutY="994.0" prefHeight="17.0" prefWidth="60.0" text="CH40" />
+                        <TextField fx:id="LabelCh41" layoutX="-1.0" layoutY="1020.0" prefHeight="17.0" prefWidth="60.0" text="CH41" />
+                        <TextField fx:id="LabelCh42" layoutX="-1.0" layoutY="1045.0" prefHeight="17.0" prefWidth="60.0" text="CH42" />
+                        <TextField fx:id="LabelCh43" layoutX="-1.0" layoutY="1070.0" prefHeight="17.0" prefWidth="60.0" text="CH43" />
+                        <TextField fx:id="LabelCh44" layoutX="-1.0" layoutY="1095.0" prefHeight="17.0" prefWidth="60.0" text="CH44" />
+                        <TextField fx:id="LabelCh45" layoutX="-1.0" layoutY="1120.0" prefHeight="17.0" prefWidth="60.0" text="CH45" />
+                        <TextField fx:id="LabelCh46" layoutX="-1.0" layoutY="1145.0" prefHeight="17.0" prefWidth="60.0" text="CH46" />
+                        <TextField fx:id="LabelCh47" layoutX="-1.0" layoutY="1170.0" prefHeight="17.0" prefWidth="60.0" text="CH47" />
+                        <TextField fx:id="LabelCh48" layoutX="-1.0" layoutY="1195.0" prefHeight="17.0" prefWidth="60.0" text="CH48" />
+                        <TextField fx:id="LabelCh49" layoutX="-1.0" layoutY="1221.0" prefHeight="17.0" prefWidth="60.0" text="CH49" />
+                        <TextField fx:id="LabelCh50" layoutX="-1.0" layoutY="1246.0" prefHeight="17.0" prefWidth="60.0" text="CH50" />
+                        <TextField fx:id="LabelCh51" layoutX="-1.0" layoutY="1271.0" prefHeight="17.0" prefWidth="60.0" text="CH51" />
+                        <TextField fx:id="LabelCh52" layoutX="-1.0" layoutY="1296.0" prefHeight="17.0" prefWidth="60.0" text="CH52" />
+                        <TextField fx:id="LabelCh53" layoutX="-1.0" layoutY="1321.0" prefHeight="17.0" prefWidth="60.0" text="CH53" />
+                        <TextField fx:id="LabelCh54" layoutX="-1.0" layoutY="1346.0" prefHeight="17.0" prefWidth="60.0" text="CH54" />
+                        <TextField fx:id="LabelCh55" layoutX="-1.0" layoutY="1371.0" prefHeight="17.0" prefWidth="60.0" text="CH55" />
+                        <TextField fx:id="LabelCh56" layoutX="-1.0" layoutY="1396.0" prefHeight="17.0" prefWidth="60.0" text="CH56" />
+                        <TextField fx:id="LabelCh57" layoutX="-1.0" layoutY="1421.0" prefHeight="17.0" prefWidth="60.0" text="CH57" />
+                        <TextField fx:id="LabelCh58" layoutX="-1.0" layoutY="1446.0" prefHeight="17.0" prefWidth="60.0" text="CH58" />
+                        <TextField fx:id="LabelCh59" layoutX="-1.0" layoutY="1471.0" prefHeight="17.0" prefWidth="60.0" text="CH59" />
+                        <TextField fx:id="LabelCh60" layoutX="-1.0" layoutY="1496.0" prefHeight="17.0" prefWidth="60.0" text="CH60" />
+                        <TextField fx:id="LabelCh61" layoutX="-1.0" layoutY="1521.0" prefHeight="17.0" prefWidth="60.0" text="CH61" />
+                        <TextField fx:id="LabelCh62" layoutX="-1.0" layoutY="1546.0" prefHeight="17.0" prefWidth="60.0" text="CH62" />
+                        <TextField fx:id="LabelCh63" layoutX="-1.0" layoutY="1571.0" prefHeight="17.0" prefWidth="60.0" text="CH63" />
+                        <TextField fx:id="LabelCh64" layoutX="-1.0" layoutY="1596.0" prefHeight="17.0" prefWidth="60.0" text="CH64" />
+                        <Line fx:id="valueMarker" endX="-39.0" endY="1510.0" layoutX="100.0" layoutY="117.0" startX="-39.0" startY="-115.0" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+            <AnchorPane layoutX="14.0" layoutY="39.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="178.0">
+                <children>
+                    <ScrollPane prefHeight="774.0" prefViewportHeight="850.0" prefViewportWidth="176.0" prefWidth="178.0">
+                        <content>
+                            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="176.0">
+                                <children>
+                                    <Label alignment="CENTER" layoutX="37.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="70.0" text="COM Ports" textAlignment="CENTER">
+                                        <font>
+                                            <Font size="10.0" />
+                                        </font>
+                                    </Label>
+                                    <TitledPane layoutX="1.0" layoutY="78.0" prefHeight="335.0" prefWidth="188.0" text="EEG Setting">
+                                        <content>
+                                            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="170.0">
+                                                <children>
+                                                    <ChoiceBox fx:id="ModeADSBox" layoutY="80.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="70.0">
+                                                        <items>
+                                                            <FXCollections fx:factory="observableArrayList">
+                                                                <String fx:value="NORMAL" />
+                                                                <String fx:value="TEST SIGNAL" />
+                                                            </FXCollections>
+                                                        </items>
+                                                    </ChoiceBox>
+                                                    <Label alignment="CENTER" layoutX="77.0" layoutY="63.0" prefHeight="20.0" prefWidth="60.0" text="Chip Select" textAlignment="CENTER">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <Label alignment="CENTER" layoutX="74.0" layoutY="22.0" prefHeight="20.0" prefWidth="65.0" text="Sample Rate" textAlignment="CENTER">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>    
+                                                    <Label alignment="CENTER" layoutY="196.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="140.0" text="Filter">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>                                      
+                                                    <Label alignment="CENTER" layoutY="22.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="65.0" text="ADS Model" textAlignment="CENTER">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <ChoiceBox fx:id="ChannelsBox" layoutY="124.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="70.0">
+                                                        <items>
+                                                            <FXCollections fx:factory="observableArrayList">
+                                                                <String fx:value="8" />
+                                                                <String fx:value="16" />
+                                                                <String fx:value="24" />
+                                                                <String fx:value="32" />
+                                                                <String fx:value="40" />
+                                                                <String fx:value="48" />
+                                                                <String fx:value="56" />
+                                                                <String fx:value="64" />
+                                                            </FXCollections>
+                                                        </items>
+                                                    </ChoiceBox>
+                                                    <ChoiceBox fx:id="GainBox" layoutX="74.0" layoutY="124.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="65.0">
+                                                        <items>
+                                                            <FXCollections fx:factory="observableArrayList">
+                                                                <String fx:value="1" />
+                                                                <String fx:value="2" />
+                                                                <String fx:value="3" />
+                                                                <String fx:value="4" />
+                                                                <String fx:value="6" />
+                                                                <String fx:value="8" />
+                                                                <String fx:value="12" />
+                                                            </FXCollections>
+                                                        </items>
+                                                    </ChoiceBox>
+                                                    <Label alignment="CENTER" layoutX="71.0" layoutY="107.0" prefHeight="21.0" prefWidth="70.0" text="Gain" textAlignment="CENTER">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <ChoiceBox fx:id="YScaleBox" layoutY="169.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="70.0">
+                                                        <items>
+                                                            <FXCollections fx:factory="observableArrayList">
+                                                                <String fx:value="10uV" />
+                                                                <String fx:value="20uV" />
+                                                                <String fx:value="50uV" />
+                                                                <String fx:value="100uV" />
+                                                                <String fx:value="200uV" />
+                                                                <String fx:value="500uV" />
+                                                                <String fx:value="1mV" />
+                                                                <String fx:value="10mV" />
+                                                                <String fx:value="100mV" />
+                                                            </FXCollections>
+                                                        </items>
+                                                    </ChoiceBox>    
+                                                    <ChoiceBox fx:id="XScaleBox" layoutX="74.0" layoutY="169.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="65.0">
+                                                        <items>
+                                                            <FXCollections fx:factory="observableArrayList">
+                                                                <String fx:value="2s" />
+                                                                <String fx:value="4s" />
+                                                                <String fx:value="10s" />
+                                                                <String fx:value="20s" />
+                                                                <String fx:value="40s" />
+                                                            </FXCollections>
+                                                        </items>
+                                                    </ChoiceBox>
+                                                    <ChoiceBox fx:id="FilterChoice" layoutY="212.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="70.0">
+                                                        <items>
+                                                            <FXCollections fx:factory="observableArrayList">
+                                                                <String fx:value="NoFilter" />
+                                                                <String fx:value="0.5-65Hz" />
+                                                                <String fx:value="0.5-40Hz" />
+                                                                <String fx:value="0.5-20Hz" />
+                                                                <String fx:value="2-65Hz" />
+                                                                <String fx:value="2-40Hz" />
+                                                                <String fx:value="2-20Hz" />
+                                                            </FXCollections>
+                                                        </items>
+                                                    </ChoiceBox>
+                                                    <CheckBox fx:id="NotchFilter" layoutX="74.0" layoutY="214.0" mnemonicParsing="false" onAction="#handleNotchFilterAction" prefHeight="20.0" prefWidth="65.0" text="Notch ">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </CheckBox>
+                                                    <Label alignment="CENTER" layoutY="63.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="70.0" text="ADS Mode" textAlignment="CENTER">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <ChoiceBox fx:id="SampleRateBox" layoutX="74.0" layoutY="38.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="65.0">
+                                                    </ChoiceBox>                           
+                                                    <Label alignment="CENTER" layoutY="107.0" prefHeight="21.0" prefWidth="70.0" text="Channels" textAlignment="CENTER">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <TextField fx:id="OutputFileText" layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="140.0" />
+                                                    <Label alignment="CENTER" layoutY="152.0" prefHeight="20.0" prefWidth="70.0" text="Y Scale">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <ChoiceBox fx:id="ADSModelBox" layoutY="38.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="70.0">
+                                                        <items>
+                                                            <FXCollections fx:factory="observableArrayList">
+                                                                <String fx:value="ADS1198" />
+                                                                <String fx:value="ADS131E08" />
+                                                                <String fx:value="ADS1298" />
+                                                            </FXCollections>
+                                                        </items>
+                                                    </ChoiceBox>
+                                                    <Label alignment="CENTER" layoutX="74.0" layoutY="152.0" prefHeight="20.0" prefWidth="65.0" text="X Scale">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <ChoiceBox fx:id="ChipSelectBox" layoutX="74.0" layoutY="80.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="65.0">
+                                                        <items>
+                                                            <FXCollections fx:factory="observableArrayList">
+                                                                <String fx:value="4" />
+                                                                <String fx:value="10" />
+                                                                <String fx:value="52" />
+                                                            </FXCollections>
+                                                        </items>
+                                                    </ChoiceBox>
+                                                    <Label alignment="CENTER" layoutY="235.0" prefHeight="20.0" prefWidth="140.0" text="OutputFile" textAlignment="CENTER">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <CheckBox fx:id="EEG_ON" layoutX="1.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleNotchFilterAction" prefHeight="20.0" prefWidth="65.0" text="EEG ON">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </CheckBox>
+                                                </children>
+                                            </AnchorPane>
+                                        </content>
+                                    </TitledPane>
+                                    <Button fx:id="ConnectButton" layoutX="1.0" layoutY="48.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButtonConnect" prefHeight="24.0" prefWidth="140.0" text="Connect" textFill="#f20606">
+                                        <font>
+                                            <Font size="10.0" />
+                                        </font>
+                                    </Button>
+                                    <TitledPane layoutX="1.0" layoutY="424.0" prefHeight="247.0" prefWidth="181.0" text="tES Setting">
+                                        <content>
+                                            <AnchorPane prefHeight="230.0" prefWidth="179.0">
+                                                <children>
+                                                    <Label alignment="CENTER" layoutX="74.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="65.0" text="Frequency">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <TextField fx:id="AmplitudeText" layoutY="91.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="70.0" />
+                                                    <Button fx:id="tESStartButton" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButtonStart_tES" prefHeight="24.0" prefWidth="140.0" text="Start" textFill="#f20606">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Button>
+                                                    <ChoiceBox fx:id="WaveFormBox" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="70.0">
+                                                        <items>
+                                                            <FXCollections fx:factory="observableArrayList">
+                                                                <String fx:value="tDCS" />
+                                                                <String fx:value="tACS" />
+                                                                <String fx:value="Random Noise" />
+                                                                <String fx:value="tDCS Sham" />
+                                                            </FXCollections>
+                                                        </items>
+                                                    </ChoiceBox>
+                                                    <TextField fx:id="FrequencyText" layoutX="74.0" layoutY="91.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="65.0" />
+                                                    <Label alignment="CENTER" layoutX="74.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="65.0" text="Duty Cycle">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <TextField fx:id="DutyCycleText" layoutX="74.0" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="65.0" />                                           
+                                                    <Label alignment="CENTER" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="70.0" text="Waveform">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <Label alignment="CENTER" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="70.0" text="Amplitude">
+                                                        <font>
+                                                            <Font size="10.0" />
+                                                        </font>
+                                                    </Label>
+                                                    <Circle fx:id="CircleGreen" fill="#21ff210d" layoutX="22.0" layoutY="140.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+                                                    <Circle fx:id="CircleYellow" fill="#f0ff210d" layoutX="70.0" layoutY="140.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+                                                    <Circle fx:id="CircleRed" fill="#ff21210d" layoutX="118.0" layoutY="140.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+                                                </children>
+                                            </AnchorPane>
+                                        </content>
+                                    </TitledPane>
+                                <ChoiceBox fx:id="COMBox" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="70.0">
+                                </ChoiceBox>
+                                <Button fx:id="SearchButton" layoutX="75.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButtonSearch" prefHeight="24.0" prefWidth="65.0" text="Search">
+                                    <font>
+                                        <Font size="10.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>    
+    </children>
+        
+       
+    <!-- Comment in order to open the FXML with scene builder
+    -->  
+    <fx:define> 
+        <ArrayList fx:id="SelectedPoints" >
+            <fx:reference source="P100"/>
+            <fx:reference source="P200"/>
+            <fx:reference source="P300"/>
+            <fx:reference source="P400"/>
+            <fx:reference source="P500"/>
+        </ArrayList>
+    </fx:define>
+               
+               
+    <fx:define>         
+        <ArrayList fx:id="LabelChList" >
+            <fx:reference source="LabelCh1"/>
+            <fx:reference source="LabelCh2"/>
+            <fx:reference source="LabelCh3"/>
+            <fx:reference source="LabelCh4"/>
+            <fx:reference source="LabelCh5"/>
+            <fx:reference source="LabelCh6"/>
+            <fx:reference source="LabelCh7"/>
+            <fx:reference source="LabelCh8"/>
+            <fx:reference source="LabelCh9"/>
+            <fx:reference source="LabelCh10"/>
+            <fx:reference source="LabelCh11"/>
+            <fx:reference source="LabelCh12"/>
+            <fx:reference source="LabelCh13"/>
+            <fx:reference source="LabelCh14"/>
+            <fx:reference source="LabelCh15"/>
+            <fx:reference source="LabelCh16"/>
+            <fx:reference source="LabelCh17"/>
+            <fx:reference source="LabelCh18"/>
+            <fx:reference source="LabelCh19"/>
+            <fx:reference source="LabelCh20"/>
+            <fx:reference source="LabelCh21"/>
+            <fx:reference source="LabelCh22"/>
+            <fx:reference source="LabelCh23"/>
+            <fx:reference source="LabelCh24"/>
+            <fx:reference source="LabelCh25"/>
+            <fx:reference source="LabelCh26"/>
+            <fx:reference source="LabelCh27"/>
+            <fx:reference source="LabelCh28"/>
+            <fx:reference source="LabelCh29"/>
+            <fx:reference source="LabelCh30"/>
+            <fx:reference source="LabelCh31"/>
+            <fx:reference source="LabelCh32"/>
+            <fx:reference source="LabelCh33"/>
+            <fx:reference source="LabelCh34"/>
+            <fx:reference source="LabelCh35"/>
+            <fx:reference source="LabelCh36"/>
+            <fx:reference source="LabelCh37"/>
+            <fx:reference source="LabelCh38"/>
+            <fx:reference source="LabelCh39"/>
+            <fx:reference source="LabelCh40"/>
+            <fx:reference source="LabelCh41"/>
+            <fx:reference source="LabelCh42"/>
+            <fx:reference source="LabelCh43"/>
+            <fx:reference source="LabelCh44"/>
+            <fx:reference source="LabelCh45"/>
+            <fx:reference source="LabelCh46"/>
+            <fx:reference source="LabelCh47"/>
+            <fx:reference source="LabelCh48"/>
+            <fx:reference source="LabelCh49"/>
+            <fx:reference source="LabelCh50"/>
+            <fx:reference source="LabelCh51"/>
+            <fx:reference source="LabelCh52"/>
+            <fx:reference source="LabelCh53"/>
+            <fx:reference source="LabelCh54"/>
+            <fx:reference source="LabelCh55"/>
+            <fx:reference source="LabelCh56"/>
+            <fx:reference source="LabelCh57"/>
+            <fx:reference source="LabelCh58"/>
+            <fx:reference source="LabelCh59"/>
+            <fx:reference source="LabelCh60"/>
+            <fx:reference source="LabelCh61"/>
+            <fx:reference source="LabelCh62"/>
+            <fx:reference source="LabelCh63"/>
+            <fx:reference source="LabelCh64"/>
+        </ArrayList>
+    </fx:define>      
+               
+    <fx:define>         
+        <ArrayList fx:id="SelectedChannelList" >
+            <fx:reference source="Channel1"/>
+            <fx:reference source="Channel2"/>
+            <fx:reference source="Channel3"/>
+            <fx:reference source="Channel4"/>
+            <fx:reference source="Channel5"/>
+            <fx:reference source="Channel6"/>
+            <fx:reference source="Channel7"/>
+            <fx:reference source="Channel8"/>
+            <fx:reference source="Channel9"/>
+            <fx:reference source="Channel10"/>
+            <fx:reference source="Channel11"/>
+            <fx:reference source="Channel12"/>
+            <fx:reference source="Channel13"/>
+            <fx:reference source="Channel14"/>
+            <fx:reference source="Channel15"/>
+            <fx:reference source="Channel16"/>
+            <fx:reference source="Channel17"/>
+            <fx:reference source="Channel18"/>
+            <fx:reference source="Channel19"/>
+            <fx:reference source="Channel20"/>
+            <fx:reference source="Channel21"/>
+            <fx:reference source="Channel22"/>
+            <fx:reference source="Channel23"/>
+            <fx:reference source="Channel24"/>
+            <fx:reference source="Channel25"/>
+            <fx:reference source="Channel26"/>
+            <fx:reference source="Channel27"/>
+            <fx:reference source="Channel28"/>
+            <fx:reference source="Channel29"/>
+            <fx:reference source="Channel30"/>
+            <fx:reference source="Channel31"/>
+            <fx:reference source="Channel32"/>
+            <fx:reference source="Channel33"/>
+            <fx:reference source="Channel34"/>
+            <fx:reference source="Channel35"/>
+            <fx:reference source="Channel36"/>
+            <fx:reference source="Channel37"/>
+            <fx:reference source="Channel38"/>
+            <fx:reference source="Channel39"/>
+            <fx:reference source="Channel40"/>
+            <fx:reference source="Channel41"/>
+            <fx:reference source="Channel42"/>
+            <fx:reference source="Channel43"/>
+            <fx:reference source="Channel44"/>
+            <fx:reference source="Channel45"/>      
+            <fx:reference source="Channel46"/>
+            <fx:reference source="Channel47"/>
+            <fx:reference source="Channel48"/> 
+            <fx:reference source="Channel49"/>    
+            <fx:reference source="Channel50"/>
+            <fx:reference source="Channel51"/>
+            <fx:reference source="Channel52"/>
+            <fx:reference source="Channel53"/>    
+            <fx:reference source="Channel54"/>    
+            <fx:reference source="Channel55"/>     
+            <fx:reference source="Channel56"/>      
+            <fx:reference source="Channel57"/>
+            <fx:reference source="Channel58"/>     
+            <fx:reference source="Channel59"/> 
+            <fx:reference source="Channel60"/>
+            <fx:reference source="Channel61"/>
+            <fx:reference source="Channel62"/>
+            <fx:reference source="Channel63"/> 
+            <fx:reference source="Channel64"/>      
+        </ArrayList>
+    </fx:define>
+    <!--         
+    -->
+             
+             
+             
+</AnchorPane>
+</children>
+
+</VBox>
