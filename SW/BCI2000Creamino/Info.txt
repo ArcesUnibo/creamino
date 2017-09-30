@@ -1,0 +1,7 @@
+BCI2000 library
+This library was tested with the TI ADS1198 (16-bit ADC)
+It was modified in order to work with ADS1298 but it has not been tested
+(Not tested)
+
+To import the library in BCI2000 follows the instructions reported here:
+https://www.bci2000.org/mediawiki/index.php/Programming_Reference:BCI2000_Source_Code

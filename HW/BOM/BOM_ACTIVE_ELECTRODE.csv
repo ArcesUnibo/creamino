@@ -1,0 +1,10 @@
+Description,Designator,Footprint,Comment,Quantity
+,,,,
+Capacitor (Surface Mount),CP1,CC3225-1210,220u,1
+Capacitor (Surface Mount),CP2,CC1005-0402,22n,1
+Default Diode,D1,SC79,1N4148,1
+Semiconductor Resistor,R1,CR1005-0402,1.6K,1
+Semiconductor Resistor,R2,CR1608-0603,71.4K,1
+Semiconductor Resistor,R3,CR1005-0402,604K,1
+Semiconductor Resistor,R4,CR1005-0402,33K,1
+OPA378AIDBVT,U1,SOT23-5DVB,OPA378AIDBVT,1
