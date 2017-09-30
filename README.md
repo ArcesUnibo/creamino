@@ -13,3 +13,5 @@ In the dialog we provide:
 The URL of the project http://github.com/ArcesUnibo/creamino
 The directory of the project. This will be automatically populated with the name of the project in our selected folder.
 Select the Recursive checkbox.
+
+Thank you for using Creamino!
