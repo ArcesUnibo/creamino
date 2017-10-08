@@ -1,0 +1,108 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10-Sep-2015, 08:39:29
+    Author     : Matteo Chiesi - University of Bologna
+*/
+
+.chart-series-line {    
+    -fx-stroke-width: 2px;
+    -fx-effect: null;
+}
+
+.default-color0.chart-series-line { -fx-stroke: #0000FF; }
+.default-color1.chart-series-line { -fx-stroke: #0000FF; }
+.default-color2.chart-series-line { -fx-stroke: #0000FF; }
+.default-color3.chart-series-line { -fx-stroke: #0000FF; }
+.default-color4.chart-series-line { -fx-stroke: #0000FF; }
+.default-color5.chart-series-line { -fx-stroke: #0000FF; }
+.default-color6.chart-series-line { -fx-stroke: #0000FF; }
+.default-color7.chart-series-line { -fx-stroke: #0000FF; }
+.default-color8.chart-series-line { -fx-stroke: #0000FF; }
+.default-color9.chart-series-line { -fx-stroke: #0000FF; }
+.default-color10.chart-series-line { -fx-stroke: #0000FF; }
+.default-color11.chart-series-line { -fx-stroke: #0000FF; }
+.default-color12.chart-series-line { -fx-stroke: #0000FF; }
+.default-color13.chart-series-line { -fx-stroke: #0000FF; }
+.default-color14.chart-series-line { -fx-stroke: #0000FF; }
+.default-color15.chart-series-line { -fx-stroke: #0000FF; }
+.default-color16.chart-series-line { -fx-stroke: #0000FF; }
+.default-color17.chart-series-line { -fx-stroke: #0000FF; }
+.default-color18.chart-series-line { -fx-stroke: #0000FF; }
+.default-color19.chart-series-line { -fx-stroke: #0000FF; }
+.default-color20.chart-series-line { -fx-stroke: #0000FF; }
+.default-color21.chart-series-line { -fx-stroke: #0000FF; }
+.default-color22.chart-series-line { -fx-stroke: #0000FF; }
+.default-color23.chart-series-line { -fx-stroke: #0000FF; }
+.default-color24.chart-series-line { -fx-stroke: #0000FF; }
+.default-color25.chart-series-line { -fx-stroke: #0000FF; }
+.default-color26.chart-series-line { -fx-stroke: #0000FF; }
+.default-color27.chart-series-line { -fx-stroke: #0000FF; }
+.default-color28.chart-series-line { -fx-stroke: #0000FF; }
+.default-color29.chart-series-line { -fx-stroke: #0000FF; }
+.default-color30.chart-series-line { -fx-stroke: #0000FF; }
+.default-color31.chart-series-line { -fx-stroke: #0000FF; }
+.default-color32.chart-series-line { -fx-stroke: #0000FF; }
+.default-color33.chart-series-line { -fx-stroke: #0000FF; }
+.default-color34.chart-series-line { -fx-stroke: #0000FF; }
+.default-color35.chart-series-line { -fx-stroke: #0000FF; }
+.default-color36.chart-series-line { -fx-stroke: #0000FF; }
+.default-color37.chart-series-line { -fx-stroke: #0000FF; }
+.default-color38.chart-series-line { -fx-stroke: #0000FF; }
+.default-color39.chart-series-line { -fx-stroke: #0000FF; }
+.default-color40.chart-series-line { -fx-stroke: #0000FF; }
+.default-color41.chart-series-line { -fx-stroke: #0000FF; }
+.default-color42.chart-series-line { -fx-stroke: #0000FF; }
+.default-color43.chart-series-line { -fx-stroke: #0000FF; }
+.default-color44.chart-series-line { -fx-stroke: #0000FF; }
+.default-color45.chart-series-line { -fx-stroke: #0000FF; }
+.default-color46.chart-series-line { -fx-stroke: #0000FF; }
+.default-color47.chart-series-line { -fx-stroke: #0000FF; }
+.default-color48.chart-series-line { -fx-stroke: #0000FF; }
+.default-color49.chart-series-line { -fx-stroke: #0000FF; }
+.default-color50.chart-series-line { -fx-stroke: #0000FF; }
+.default-color51.chart-series-line { -fx-stroke: #0000FF; }
+.default-color52.chart-series-line { -fx-stroke: #0000FF; }
+.default-color53.chart-series-line { -fx-stroke: #0000FF; }
+.default-color54.chart-series-line { -fx-stroke: #0000FF; }
+.default-color55.chart-series-line { -fx-stroke: #0000FF; }
+.default-color56.chart-series-line { -fx-stroke: #0000FF; }
+.default-color57.chart-series-line { -fx-stroke: #0000FF; }
+.default-color58.chart-series-line { -fx-stroke: #0000FF; }
+.default-color59.chart-series-line { -fx-stroke: #0000FF; }
+.default-color60.chart-series-line { -fx-stroke: #0000FF; }
+.default-color61.chart-series-line { -fx-stroke: #0000FF; }
+.default-color62.chart-series-line { -fx-stroke: #0000FF; }
+.default-color63.chart-series-line { -fx-stroke: #0000FF; }
+
+
+.text-field {
+    -fx-font-size: 8pt;
+}
+
+.choice-box {
+    -fx-font-size: 8pt;
+}
+
+/*
+
+.choice-box .menu-item:focused {
+  -fx-background-color: yellow ;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: antiquewhite ;
+}
+
+.choice-box .label {
+     -fx-text-fill: white; 
+}
+
+.choice-box {
+  -fx-mark-color: green ;
+}
+
+*/
