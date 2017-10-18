@@ -1,36 +1,36 @@
-In order to program the Arduino Board you have to follow these instructions.
+1) Use the Java Interface
 
-1) Install the Arduino Desktop IDE
+In order to use the Java Interface you go on creamino\SW\CreaminoJavaInterface\dist 
+Then double click on CreaminoJavaInterface.jar file. The interface appears.
+Connect the Arduino Native port to a PC USB then click on the search button on the left under COM ports.
+This perform a check on the available COM port. Chose the right one. 
+(For further information on Arduino COM ports do on: https://www.arduino.cc/en/Guide/ArduinoDue) 
+Once this has been done configure your EEG system. The ADS model (in our case ADS1298) the chip select (4),
+the sample rate (500 SPS) the number of ADC Channels, the scale, the filter type and the gain for each channel.
+In addition you can chose between the ADS mode. This allows you to configure the board in normal mode to acquire
+EEG signals or to use the autogenerate test signals from the ADS1298.
+For further information on how to configure ADS1298 please read http://www.ti.com/product/ADS1298 
 
-Instructions are available at https://www.arduino.cc/en/Guide/HomePage
 
-2) Installing Additional Arduino Cores
+2) Modify the Java Interface as you want
 
-Only AVR Arduino boards are installed by default. 
-Some Arduino boards require an additional Core to be installed (e.g. the Arduino Due used in this work)
-In order for the Arduino IDE to be able to program an Arduino Due, you need to install the SAM Core 
-using the Boards Manager. Instructions are reported here: https://www.arduino.cc/en/Guide/Cores
+In order to modify the interface you have to download Netbeans from here:
+https://netbeans.org/downloads/
 
-3) Copy the sketch and the library
+a) Download and Install Netbeans IDE from here : https://netbeans.org/downloads/
+ 
+b) Open the Netbeans IDE 
+Click on File-> Open project and then select CreaminoJavaInterface located in the SW folder of the repository.
+If you chose to put the repository in the directory C:\WORK is simple
 
-Copy the Arduino sketch ADS1298_ArduinoDue in the folder
-/Users/<username>/Documents/Arduino/ADS1298_ArduinoDue/
-Be aware that the name of the sketch and the name of the last folder must be the same. So if you decide
-to rename the sketch you have to do the same with the last folder
+Otherwise you get two errors that you need to solve.
+In order to resolve errors you need to download and import two libraries.
+The first one is jssc available at https://github.com/scream3r/java-simple-serial-connector/releases.
+Download the jSSC-2.8.0-Release.zip and unpacket the archieve using winzip or 7-zip
+Then on Netbeans select Tools->Libraries
+Add the jssc-2.8.0 libraries by including the Classpath the Sources and the Javadoc that you found in the jSSC-2.8.0-Release.zip
+The same must be done with the aqua libraries available here: http://aquafx-project.com/downloads.html
 
-Copy the library folder in:
-/Users/<username>/Documents/Arduino/libraries/
+c) Modify the interface
 
-4) Upload the software on Arduino
-
-Connect your Arduino DUE programming port to your PC or MAC via USB
-Before uploading your sketch, you need to select the correct items from the Tools > Board and Tools > Port menus. 
-Once you've selected the correct serial port and board, press the upload button in the toolbar or select the Upload item from the Sketch menu. 
-Current Arduino boards will reset automatically and begin the upload. You'll see the RX and TX LEDs blink as the sketch is uploaded. 
-The Arduino Software (IDE) will display a message when the upload is complete.
-For further information follows the instructions reported here: https://www.arduino.cc/en/Guide/Environment#toc9
-
-5) Usege of Creamino
-Attach the shield to the Arduino board. Use the Native port to acquire EEG signals and the Programming port to send the trigger.
-
-For further information refer to the paper which describes several setup experiments.
+From the Netbeans IDE knowing a bit of Java you can modify the interface as you want.
