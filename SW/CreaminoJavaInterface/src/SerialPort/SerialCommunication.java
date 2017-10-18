@@ -1,7 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The MIT License
+ *
+ * Copyright 2017 Alma Mater Studiorum - Università di Bologna.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package SerialPort;
 
@@ -40,10 +58,13 @@ import jssc.SerialPortTimeoutException;
  */
 public class SerialCommunication implements SerialPortEventListener{
     
+   /*This class use the JSSC library to implement a communication over the
+    virtual COM port */
     
+   /*Class variables*/ 
    private static final String ReferenceWord = "Ready";
    String ConnectingWord;
-   static SerialPort serialPort;// = new SerialPort(portNames[0]); //"COM8"
+   static SerialPort serialPort;
    private byte[] DataBuffer = new byte[1000000];
    public double[] Word = new double[FXMLDocumentController.MAXCHANNELS];
    public double[] NotchWord = new double[FXMLDocumentController.MAXCHANNELS];
@@ -62,26 +83,24 @@ public class SerialCommunication implements SerialPortEventListener{
    private int xSeriesData = 0;
    public List<XYChart.Series> seriesList;  
    
-    private final FXMLDocumentController Controller; 
-    private final Timeline animation;
-    private static int Remove;
-    private static int Semaphore;
+   private final FXMLDocumentController Controller; 
+   private final Timeline animation;
+   private static int Remove;
     
-    private Node chartArea;
-    private Bounds chartAreaBounds;
-    private double RefactorMovableLine;
+   private Node chartArea;
+   private Bounds chartAreaBounds;
+   private double RefactorMovableLine;
     
     
-    public SerialCommunication(FXMLDocumentController Controller) {
-       
-        this.Controller = Controller; 
-        this.seriesList = new ArrayList<>();
-        IIR.ResetNotch();
+   public SerialCommunication(FXMLDocumentController Controller) {
+       this.Controller = Controller; 
+       this.seriesList = new ArrayList<>();
+       IIR.ResetNotch();
         
-        Controller.Chart.setCreateSymbols(false);
-        Controller.Chart.getData().clear();
+       Controller.Chart.setCreateSymbols(false);
+       Controller.Chart.getData().clear();
         
-        for(int i=0;i<FXMLDocumentController.MAXCHANNELS;i++){
+       for(int i=0;i<FXMLDocumentController.MAXCHANNELS;i++){
             //Create a list of Series -> each series is connected to a chart
             XYChart.Series series = new XYChart.Series();
             series.setName("series" + i);
@@ -96,23 +115,20 @@ public class SerialCommunication implements SerialPortEventListener{
         animation = new Timeline();
         animation.getKeyFrames().add(new KeyFrame(Duration.millis(100), (ActionEvent actionEvent) -> {
             addDataToSeries();
-            UpdateSemaphore();
         }));
         
         animation.setCycleCount(Animation.INDEFINITE);
         
     }
     
- /**
-     * @return *****************************************************/
+ /*** @return *****************************************************/
+
     //Check devices connect to COM Ports
     public String[] CheckPorts(){
         String[] portNames = SerialPortList.getPortNames();
         return portNames; 
      }
-    
-    
-    
+        
      /**
      * @param SelectedPort*
      * @return ****************************************************/
@@ -227,7 +243,7 @@ public class SerialCommunication implements SerialPortEventListener{
         catch (SerialPortException ex) {
             System.out.println(ex);
         }
-        write();  //da riaggiungere
+        write();  
         Remove = 0;
         GraphCount =0;
         
@@ -236,35 +252,7 @@ public class SerialCommunication implements SerialPortEventListener{
         }
         
     }
-    
-    
-    public synchronized void startStimulation(){
-        try {
-            if (serialPort != null) {
-                
-                serialPort.writeString("StartStimu\0");                
-                serialPort.writeBytes(FXMLDocumentController.StimParam);
-                
-            }
-        }
-        catch (SerialPortException ex) {
-            System.out.println(ex);
-        }
-    }
-
-    public synchronized void stopStimulation(){
-         
-        try {
-            if (serialPort != null) {
-                serialPort.writeString("StopStimul\0");
-            }
-        }
-        catch (SerialPortException ex) {
-            System.out.println(ex);
-        }
-    }    
-    
-    
+        
         public void resetArduino() {
        try {
            serialPort.setDTR(true);
@@ -303,7 +291,7 @@ public class SerialCommunication implements SerialPortEventListener{
                         for(int j=0;j<GraphUpdateCycles;j++){   
                             
                             try {
-                                outputStream.write(DataBuffer, 0, FXMLDocumentController.CHANNELS*FXMLDocumentController.bytesPerChannel);//FXMLDocumentController.CHANNELS*2
+                                outputStream.write(DataBuffer, 0, FXMLDocumentController.CHANNELS*FXMLDocumentController.bytesPerChannel);
                                 outputStreamTrigger.write(DataBuffer, 0, FXMLDocumentController.CHANNELS*FXMLDocumentController.bytesPerChannel+2);
                             } catch (Exception e) {
                                 System.err.println(e.toString());
@@ -330,26 +318,16 @@ public class SerialCommunication implements SerialPortEventListener{
                                 }
                                 
                                 for(int i=0;i<FXMLDocumentController.CHANNELS;i++){
-                                    //commentare solo if se chiesi scopa, lasciare Buffer
                                     if(GraphCount == FXMLDocumentController.ScaleCount){
                                         BufferQueue[i].add(FilteredWord[i]-REF+ FXMLDocumentController.UpperBoundY*FXMLDocumentController.CHANNELS*2 -FXMLDocumentController.offset/2 -i*FXMLDocumentController.offset*FXMLDocumentController.full_window);
                                     }
                                 }                   
                                 
                                 if(GraphCount == FXMLDocumentController.ScaleCount){
-                                    GraphCount = 0;    //commentare if e scale count, lasciare count20
+                                    GraphCount = 0;   
                                 }
                                                              
                                 if((DataBuffer[FXMLDocumentController.CHANNELS*FXMLDocumentController.bytesPerChannel]& (byte)0xF0) == (byte)0xF0 && (DataBuffer[FXMLDocumentController.CHANNELS*FXMLDocumentController.bytesPerChannel] & (byte)0xF0) == (byte)0xF0){
-                                    if((DataBuffer[FXMLDocumentController.CHANNELS*FXMLDocumentController.bytesPerChannel]& (byte)0x0F) == (byte)0x01){
-                                        Semaphore = 0;
-                                    }
-                                    else if((DataBuffer[FXMLDocumentController.CHANNELS*FXMLDocumentController.bytesPerChannel]& (byte)0x0F) == (byte)0x02) {
-                                        Semaphore = 1;
-                                    }    
-                                    else {
-                                        Semaphore = 2;
-                                    }
                                     DataBuffer=Arrays.copyOfRange(DataBuffer,(FXMLDocumentController.CHANNELS*FXMLDocumentController.bytesPerChannel+2), DataBuffer.length);
                                 }
                                 else{
@@ -379,9 +357,6 @@ public class SerialCommunication implements SerialPortEventListener{
       try{
         outputStream.flush();
         outputStream.close();
-        //Write a dummy buffer before closing the port
-        //for(int i = 0; i<64; i++) Ranzato in data 13/10/16
-            //outputStreamTrigger.write(0x00);//FXMLDocumentController.CHANNELS*2     
         outputStreamTrigger.flush();
         outputStreamTrigger.close();
 
@@ -456,7 +431,7 @@ public class SerialCommunication implements SerialPortEventListener{
                         
         for(int j=0;j<FXMLDocumentController.CHANNELS;j++){
             if (Controller.SelectedChannelList.get(j).isSelected()){  
-                seriesList.get(j).getData().add(new LineChart.Data(xSeriesData, BufferQueue[j].remove())); //BufferQueue[j].remove()                                             
+                seriesList.get(j).getData().add(new LineChart.Data(xSeriesData, BufferQueue[j].remove()));                                              
                     if(seriesList.get(j).getData().size() >= FXMLDocumentController.MAX_DATA_POINTS)
                         seriesList.get(j).getData().remove(0, seriesList.get(j).getData().size() - FXMLDocumentController.MAX_DATA_POINTS);
                 }
@@ -473,29 +448,6 @@ public class SerialCommunication implements SerialPortEventListener{
         else
             xSeriesData = xSeriesData+1;
         }
-    }
-    
-     public void UpdateSemaphore(){
-         if(Semaphore == 0){
-             Controller.CircleGreen.setFill(Color.web("#21ff210d"));
-             Controller.CircleRed.setFill(Color.web("#ff2121"));
-             Controller.CircleYellow.setFill(Color.web("#f0ff210d"));
-         }
-         else if (Semaphore == 1){
-             Controller.CircleGreen.setFill(Color.web("#21ff21"));
-             Controller.CircleYellow.setFill(Color.web("#f0ff210d"));
-             Controller.CircleRed.setFill(Color.web("#ff21210d"));
-         }
-         else{
-             Controller.CircleGreen.setFill(Color.web("#21ff210d"));
-             Controller.CircleYellow.setFill(Color.web("#f0ff21"));
-             Controller.CircleRed.setFill(Color.web("#ff21210d"));
-         }
-             
-     }
-
-     public void save(){
-       
     }
     
 }

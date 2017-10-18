@@ -1,8 +1,27 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The MIT License
+ *
+ * Copyright 2017 Alma Mater Studiorum - Università di Bologna.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
+
 package creaminointerface;
 
 import SerialPort.SerialCommunication;
@@ -43,7 +62,6 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-
 /**
  *
  * @author Matteo Chiesi - University of Bologna
@@ -79,9 +97,6 @@ public class FXMLDocumentController implements Initializable {
     */
     
     public static byte InitParam[] = new byte[5];  
-    public static byte StimParam[] = new byte[6];
-    public static short Amplitude;
-    public static short Frequency;
     public static byte ADSType;
     public static int bytesPerChannel;
     public static double full_window;
@@ -92,19 +107,19 @@ public class FXMLDocumentController implements Initializable {
     private MenuBar Menu;
     
     @FXML
-    private Button ConnectButton, tESStartButton;
+    private Button ConnectButton;
     
     @FXML
-    private TextField OutputFileText, AmplitudeText, FrequencyText, DutyCycleText;
+    private TextField OutputFileText, DutyCycleText;
     
     @FXML
-    public CheckMenuItem Connect, Stimulation, Channels1_8, Channels9_16, Channels17_24, Channels25_32, Channels33_40, Channels41_48, Channels49_56, Channels57_64, full_size;
+    public CheckMenuItem Connect, Channels1_8, Channels9_16, Channels17_24, Channels25_32, Channels33_40, Channels41_48, Channels49_56, Channels57_64, full_size;
     
     @FXML
-    public ChoiceBox<String> YScaleBox, XScaleBox, COMBox, FilterChoice, ChannelsBox, SampleRateBox, ModeADSBox, ChipSelectBox, ADSModelBox, WaveFormBox, GainBox;
+    public ChoiceBox<String> YScaleBox, XScaleBox, COMBox, FilterChoice, ChannelsBox, SampleRateBox, ModeADSBox, ChipSelectBox, ADSModelBox, GainBox;
     
     @FXML
-    public CheckBox NotchFilter, EEG_ON;
+    public CheckBox NotchFilter;
      
     @FXML
     public LineChart Chart;
@@ -120,15 +135,6 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML 
     public Line valueMarker;
-    
-    @FXML 
-    public Circle CircleGreen;
-    
-    @FXML 
-    public Circle CircleYellow;
-        
-    @FXML 
-    public Circle CircleRed;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -147,13 +153,6 @@ public class FXMLDocumentController implements Initializable {
         InitParam[2] = 2;       //Default number of ADS Scambio il 2 con l'1  
         InitParam[3] = 4;      //Chip Select
         InitParam[4] = 0x10;    //Gain
-        
-        StimParam[0] = 0x01;    //TDCS
-        StimParam[1] = 0x00;    //Amplitude LSB
-        StimParam[2] = 0x00;    //Amplitude MSB
-        StimParam[3] = 0x00;    //Frequency LSB
-        StimParam[4] = 0x00;    //Frequency MSB
-        StimParam[5] = 0x00;    //Duty Cycle
         
         //SAMPLE RATE
         SR = 500; // Sample Rate of the ADS (SPS)
@@ -586,27 +585,7 @@ public class FXMLDocumentController implements Initializable {
                         break;
                 }
             }
-        });
-        
-        WaveFormBox.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if (newValue != null) {
-                switch(newValue){
-                    case "tDCS"  :
-                        StimParam[0] = 0x01;
-                        break;
-                    case "tACS"  :
-                        StimParam[0] = 0x02;
-                        break;
-                    case "Random Noise"  :
-                        StimParam[0] = 0x03;
-                        break;
-                    case "tDCS Sham"  :
-                        StimParam[0] = 0x04;
-                        break;
-                }
-            }
-        });
-          
+        });  
     }
     
     //Menu Item Connection
@@ -680,134 +659,8 @@ public class FXMLDocumentController implements Initializable {
             ChipSelectBox.setDisable(false);
             ADSModelBox.setDisable(false);
             GainBox.setDisable(false);
-            CircleGreen.setFill(Color.web("#21ff210d"));
         }
     }
-    
-    @FXML
-    private void handleMenuItemStimulation(ActionEvent event) {
-        if(Stimulation.isSelected()){
-            if(Connect.isSelected())
-            {
-                if(AmplitudeText.getText().trim().isEmpty())
-                    Amplitude = 0;
-             else{
-                    switch (StimParam[0]) {
-                        case 0x01:
-                            Amplitude = (short)((float)(Math.round(pow(2,16) / 2.4f * parseFloat(AmplitudeText.getText()))+32768));
-                            break;
-                        case 0x02:
-                            Amplitude = (short)((float)(511 / 1.2f * parseFloat(AmplitudeText.getText())));
-                            break;
-                        case 0x03:
-                            Amplitude = (short)((float)(511 / 1.2f * parseFloat(AmplitudeText.getText())));
-                            break;
-                        default:
-                            break;
-                    }
-            }
-                StimParam[1] = (byte)(Amplitude & 0xff);
-                StimParam[2] = (byte)((Amplitude >> 8) & 0xff);
-            
-                if(FrequencyText.getText().trim().isEmpty()){
-                    
-                    Frequency = 391; //10Hz
-                    
-                    StimParam[3] = (byte)(Frequency & 0xff);
-                    StimParam[4] = (byte)((Frequency >> 8) & 0xff);
-                }
-                else
-                {
-                    Frequency = (short)(1000000/(256*(parseFloat(FrequencyText.getText()))));
-                    StimParam[3] = (byte)(Frequency & 0xff);
-                    StimParam[4] = (byte)((Frequency >> 8) & 0xff);
-                }
-                if(DutyCycleText.getText().trim().isEmpty())
-                    StimParam[5] = 0;
-                else
-                    StimParam[5] = Byte.valueOf(DutyCycleText.getText());
-
-                tESStartButton.setText("Stop");
-                CircleGreen.setFill(Color.web("#21ff21"));
-                SerialCOM.startStimulation();
-            }
-            else{
-                Stimulation.setSelected(false);
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Connection Error");
-                alert.setHeaderText("The device is currently not connected");
-                alert.setContentText("Look for the connection and try again!");
-                alert.showAndWait();
-            }
-                
-        }
-        else{
-            tESStartButton.setText("Start");
-            SerialCOM.stopStimulation();
-        }
-    }
-    
-    
-    @FXML
-    private void handleButtonStart_tES(ActionEvent event) {
-        if(!Stimulation.isSelected()){
-            if(Connect.isSelected())
-            {
-                if(AmplitudeText.getText().trim().isEmpty())
-                    Amplitude = 0;
-                else{
-                    if(StimParam[0] == 0x01)
-                        Amplitude = (short)((float)(Math.round(pow(2,16) / 2.4f * parseFloat(AmplitudeText.getText()))+32768));
-                    else if (StimParam[0] == 0x02)
-                        Amplitude = (short)((float)(511 / 1.2f * parseFloat(AmplitudeText.getText())));
-                    else if (StimParam[0] == 0x03)
-                        Amplitude = (short)((float)(511 / 1.2f * parseFloat(AmplitudeText.getText())));
-                }
-                StimParam[1] = (byte)(Amplitude & 0xff);
-                StimParam[2] = (byte)((Amplitude >> 8) & 0xff);
-            
-                if(FrequencyText.getText().trim().isEmpty()){
-                    
-                    Frequency = 391; //10Hz
-                    
-                    StimParam[3] = (byte)(Frequency & 0xff);
-                    StimParam[4] = (byte)((Frequency >> 8) & 0xff);
-                }
-                else
-                {
-                    //Frequency = (short)(1000000/(256*(parseFloat(FrequencyText.getText()))));
-                    Frequency = (short)((parseFloat(FrequencyText.getText())));
-                    StimParam[3] = (byte)(Frequency & 0xff);
-                    StimParam[4] = (byte)((Frequency >> 8) & 0xff);
-                }
-                
-                if(DutyCycleText.getText().trim().isEmpty())
-                    StimParam[5] = 0;
-                else
-                    StimParam[5] = Byte.valueOf(DutyCycleText.getText());
-
-                tESStartButton.setText("Stop");
-                Stimulation.setSelected(true);
-                CircleGreen.setFill(Color.web("#21ff21"));
-                SerialCOM.startStimulation();
-            }
-            else{
-            Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Connection Error");
-                alert.setHeaderText("The device is currently not connected");
-                alert.setContentText("Connect the device through the selected COM port and then try again!");
-                alert.showAndWait();
-            }
-        }
-        else{
-            Stimulation.setSelected(false);
-            tESStartButton.setText("Start");
-            CircleGreen.setFill(Color.web("#21ff210d"));
-            SerialCOM.stopStimulation();
-        }
-        
-    }
-    
     //Notch Filter
     @FXML
     private void handleNotchFilterAction(ActionEvent event) {

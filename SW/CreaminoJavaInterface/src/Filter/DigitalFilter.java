@@ -1,7 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The MIT License
+ *
+ * Copyright 2017 Alma Mater Studiorum - Università di Bologna.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package Filter;
 
@@ -9,7 +27,7 @@ package Filter;
  * @author Matteo Chiesi - University of Bologna
  */
 
-
+/*Digital Filter */
 public class DigitalFilter {
 
     
@@ -34,19 +52,31 @@ public class DigitalFilter {
         OUTF_Notch = new double[7][Channels];
     }
     
+    /*6th order Notch Filter Formula*/
     private double IIR6Notch(int cf, double Word)
+    {
+        for (int cf2 = 6; cf2 > 0; cf2--)
         {
-                for (int cf2 = 6; cf2 > 0; cf2--)
-                {
-                    INF_Notch[cf2][cf] = INF_Notch[cf2 - 1][cf];
-                    OUTF_Notch[cf2][cf] = OUTF_Notch[cf2 - 1][cf];
-                }
-                INF_Notch[0][cf] = Word;
-                OUTF_Notch[0][cf] = NF_Notch[0] * INF_Notch[0][cf] + NF_Notch[1] * INF_Notch[1][cf] + NF_Notch[2] * INF_Notch[2][cf] + NF_Notch[3] * INF_Notch[3][cf] + NF_Notch[4] * INF_Notch[4][cf] + NF_Notch[5] * INF_Notch[5][cf] + NF_Notch[6] * INF_Notch[6][cf];
-                return OUTF_Notch[0][cf] = OUTF_Notch[0][cf] - DF_Notch[1] * OUTF_Notch[1][cf] - DF_Notch[2] * OUTF_Notch[2][cf] - DF_Notch[3] * OUTF_Notch[3][cf] - DF_Notch[4] * OUTF_Notch[4][cf] - DF_Notch[5] * OUTF_Notch[5][cf] - DF_Notch[6] * OUTF_Notch[6][cf];                
+            INF_Notch[cf2][cf] = INF_Notch[cf2 - 1][cf];
+            OUTF_Notch[cf2][cf] = OUTF_Notch[cf2 - 1][cf];
+        }
+        
+        INF_Notch[0][cf] = Word;
+        OUTF_Notch[0][cf] = NF_Notch[0] * INF_Notch[0][cf] + NF_Notch[1] * INF_Notch[1][cf] +
+                            NF_Notch[2] * INF_Notch[2][cf] + NF_Notch[3] * INF_Notch[3][cf] + 
+                            NF_Notch[4] * INF_Notch[4][cf] + NF_Notch[5] * INF_Notch[5][cf] + 
+                            NF_Notch[6] * INF_Notch[6][cf];
+        
+        return OUTF_Notch[0][cf] = OUTF_Notch[0][cf] - 
+                                   DF_Notch[1] * OUTF_Notch[1][cf] - 
+                                   DF_Notch[2] * OUTF_Notch[2][cf] - 
+                                   DF_Notch[3] * OUTF_Notch[3][cf] - 
+                                   DF_Notch[4] * OUTF_Notch[4][cf] - 
+                                   DF_Notch[5] * OUTF_Notch[5][cf] - 
+                                   DF_Notch[6] * OUTF_Notch[6][cf];                
         }
     
-    
+    /*6th order Band Pass Filter Formula*/
     private double IIR6(int cf, double Word)
         {
                 for (int cf2 = 6; cf2 > 0; cf2--)
@@ -55,10 +85,21 @@ public class DigitalFilter {
                     OUTF[cf2][cf] = OUTF[cf2 - 1][cf];
                 }
                 INF[0][cf] = Word;
-                OUTF[0][cf] = NF[0] * INF[0][cf] + NF[1] * INF[1][cf] + NF[2] * INF[2][cf] + NF[3] * INF[3][cf] + NF[4] * INF[4][cf] + NF[5] * INF[5][cf] + NF[6] * INF[6][cf];
-                return OUTF[0][cf] = OUTF[0][cf] - DF[1] * OUTF[1][cf] - DF[2] * OUTF[2][cf] - DF[3] * OUTF[3][cf] - DF[4] * OUTF[4][cf] - DF[5] * OUTF[5][cf] - DF[6] * OUTF[6][cf];                
-            
+                OUTF[0][cf] = NF[0] * INF[0][cf] + 
+                              NF[1] * INF[1][cf] + 
+                              NF[2] * INF[2][cf] + 
+                              NF[3] * INF[3][cf] + 
+                              NF[4] * INF[4][cf] + 
+                              NF[5] * INF[5][cf] + 
+                              NF[6] * INF[6][cf];
                 
+                return OUTF[0][cf] = OUTF[0][cf] - 
+                                     DF[1] * OUTF[1][cf] - 
+                                     DF[2] * OUTF[2][cf] - 
+                                     DF[3] * OUTF[3][cf] - 
+                                     DF[4] * OUTF[4][cf] - 
+                                     DF[5] * OUTF[5][cf] - 
+                                     DF[6] * OUTF[6][cf];                
         }
     
 
@@ -70,7 +111,7 @@ public class DigitalFilter {
         return IIR6Notch(cf, Word);
     }
     
-
+    /*Filter Coefficients*/
     private void NoFilter(){
       
         NF[0] = 1;

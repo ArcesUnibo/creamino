@@ -12,7 +12,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="829.0" prefWidth="1407.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creaminointerface.FXMLDocumentController">
+<VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="829.0" prefWidth="1407.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creaminointerface.FXMLDocumentController">
    <children>
    
    <!--    
@@ -26,7 +26,6 @@
                     <Menu fx:id="File" mnemonicParsing="false" text="File">
                         <items>
                             <CheckMenuItem fx:id="Connect" mnemonicParsing="false" onAction="#handleMenuItemConnect" text="Connect" />
-                            <CheckMenuItem fx:id="Stimulation" mnemonicParsing="false" onAction="#handleMenuItemStimulation" text="tES" />
                             <MenuItem fx:id="Close" mnemonicParsing="false" onAction="#handleMenuItemClose" text="Close" />
                         </items>
                     </Menu>
@@ -406,11 +405,6 @@
                                                             <Font size="10.0" />
                                                         </font>
                                                     </Label>
-                                                    <CheckBox fx:id="EEG_ON" layoutX="1.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleNotchFilterAction" prefHeight="20.0" prefWidth="65.0" text="EEG ON">
-                                                        <font>
-                                                            <Font size="10.0" />
-                                                        </font>
-                                                    </CheckBox>
                                                 </children>
                                             </AnchorPane>
                                         </content>
@@ -420,55 +414,6 @@
                                             <Font size="10.0" />
                                         </font>
                                     </Button>
-                                    <TitledPane layoutX="1.0" layoutY="424.0" prefHeight="247.0" prefWidth="181.0" text="tES Setting">
-                                        <content>
-                                            <AnchorPane prefHeight="230.0" prefWidth="179.0">
-                                                <children>
-                                                    <Label alignment="CENTER" layoutX="74.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="65.0" text="Frequency">
-                                                        <font>
-                                                            <Font size="10.0" />
-                                                        </font>
-                                                    </Label>
-                                                    <TextField fx:id="AmplitudeText" layoutY="91.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="70.0" />
-                                                    <Button fx:id="tESStartButton" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButtonStart_tES" prefHeight="24.0" prefWidth="140.0" text="Start" textFill="#f20606">
-                                                        <font>
-                                                            <Font size="10.0" />
-                                                        </font>
-                                                    </Button>
-                                                    <ChoiceBox fx:id="WaveFormBox" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="70.0">
-                                                        <items>
-                                                            <FXCollections fx:factory="observableArrayList">
-                                                                <String fx:value="tDCS" />
-                                                                <String fx:value="tACS" />
-                                                                <String fx:value="Random Noise" />
-                                                                <String fx:value="tDCS Sham" />
-                                                            </FXCollections>
-                                                        </items>
-                                                    </ChoiceBox>
-                                                    <TextField fx:id="FrequencyText" layoutX="74.0" layoutY="91.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="65.0" />
-                                                    <Label alignment="CENTER" layoutX="74.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="65.0" text="Duty Cycle">
-                                                        <font>
-                                                            <Font size="10.0" />
-                                                        </font>
-                                                    </Label>
-                                                    <TextField fx:id="DutyCycleText" layoutX="74.0" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="65.0" />                                           
-                                                    <Label alignment="CENTER" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="70.0" text="Waveform">
-                                                        <font>
-                                                            <Font size="10.0" />
-                                                        </font>
-                                                    </Label>
-                                                    <Label alignment="CENTER" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="70.0" text="Amplitude">
-                                                        <font>
-                                                            <Font size="10.0" />
-                                                        </font>
-                                                    </Label>
-                                                    <Circle fx:id="CircleGreen" fill="#21ff210d" layoutX="22.0" layoutY="140.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
-                                                    <Circle fx:id="CircleYellow" fill="#f0ff210d" layoutX="70.0" layoutY="140.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
-                                                    <Circle fx:id="CircleRed" fill="#ff21210d" layoutX="118.0" layoutY="140.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
-                                                </children>
-                                            </AnchorPane>
-                                        </content>
-                                    </TitledPane>
                                 <ChoiceBox fx:id="COMBox" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="70.0">
                                 </ChoiceBox>
                                 <Button fx:id="SearchButton" layoutX="75.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButtonSearch" prefHeight="24.0" prefWidth="65.0" text="Search">
@@ -488,151 +433,151 @@
     <!-- Comment in order to open the FXML with scene builder
     -->  
     <fx:define> 
-        <ArrayList fx:id="SelectedPoints" >
-            <fx:reference source="P100"/>
-            <fx:reference source="P200"/>
-            <fx:reference source="P300"/>
-            <fx:reference source="P400"/>
-            <fx:reference source="P500"/>
+        <ArrayList fx:id="SelectedPoints">
+            <fx:reference source="P100" />
+            <fx:reference source="P200" />
+            <fx:reference source="P300" />
+            <fx:reference source="P400" />
+            <fx:reference source="P500" />
         </ArrayList>
     </fx:define>
                
                
     <fx:define>         
-        <ArrayList fx:id="LabelChList" >
-            <fx:reference source="LabelCh1"/>
-            <fx:reference source="LabelCh2"/>
-            <fx:reference source="LabelCh3"/>
-            <fx:reference source="LabelCh4"/>
-            <fx:reference source="LabelCh5"/>
-            <fx:reference source="LabelCh6"/>
-            <fx:reference source="LabelCh7"/>
-            <fx:reference source="LabelCh8"/>
-            <fx:reference source="LabelCh9"/>
-            <fx:reference source="LabelCh10"/>
-            <fx:reference source="LabelCh11"/>
-            <fx:reference source="LabelCh12"/>
-            <fx:reference source="LabelCh13"/>
-            <fx:reference source="LabelCh14"/>
-            <fx:reference source="LabelCh15"/>
-            <fx:reference source="LabelCh16"/>
-            <fx:reference source="LabelCh17"/>
-            <fx:reference source="LabelCh18"/>
-            <fx:reference source="LabelCh19"/>
-            <fx:reference source="LabelCh20"/>
-            <fx:reference source="LabelCh21"/>
-            <fx:reference source="LabelCh22"/>
-            <fx:reference source="LabelCh23"/>
-            <fx:reference source="LabelCh24"/>
-            <fx:reference source="LabelCh25"/>
-            <fx:reference source="LabelCh26"/>
-            <fx:reference source="LabelCh27"/>
-            <fx:reference source="LabelCh28"/>
-            <fx:reference source="LabelCh29"/>
-            <fx:reference source="LabelCh30"/>
-            <fx:reference source="LabelCh31"/>
-            <fx:reference source="LabelCh32"/>
-            <fx:reference source="LabelCh33"/>
-            <fx:reference source="LabelCh34"/>
-            <fx:reference source="LabelCh35"/>
-            <fx:reference source="LabelCh36"/>
-            <fx:reference source="LabelCh37"/>
-            <fx:reference source="LabelCh38"/>
-            <fx:reference source="LabelCh39"/>
-            <fx:reference source="LabelCh40"/>
-            <fx:reference source="LabelCh41"/>
-            <fx:reference source="LabelCh42"/>
-            <fx:reference source="LabelCh43"/>
-            <fx:reference source="LabelCh44"/>
-            <fx:reference source="LabelCh45"/>
-            <fx:reference source="LabelCh46"/>
-            <fx:reference source="LabelCh47"/>
-            <fx:reference source="LabelCh48"/>
-            <fx:reference source="LabelCh49"/>
-            <fx:reference source="LabelCh50"/>
-            <fx:reference source="LabelCh51"/>
-            <fx:reference source="LabelCh52"/>
-            <fx:reference source="LabelCh53"/>
-            <fx:reference source="LabelCh54"/>
-            <fx:reference source="LabelCh55"/>
-            <fx:reference source="LabelCh56"/>
-            <fx:reference source="LabelCh57"/>
-            <fx:reference source="LabelCh58"/>
-            <fx:reference source="LabelCh59"/>
-            <fx:reference source="LabelCh60"/>
-            <fx:reference source="LabelCh61"/>
-            <fx:reference source="LabelCh62"/>
-            <fx:reference source="LabelCh63"/>
-            <fx:reference source="LabelCh64"/>
+        <ArrayList fx:id="LabelChList">
+            <fx:reference source="LabelCh1" />
+            <fx:reference source="LabelCh2" />
+            <fx:reference source="LabelCh3" />
+            <fx:reference source="LabelCh4" />
+            <fx:reference source="LabelCh5" />
+            <fx:reference source="LabelCh6" />
+            <fx:reference source="LabelCh7" />
+            <fx:reference source="LabelCh8" />
+            <fx:reference source="LabelCh9" />
+            <fx:reference source="LabelCh10" />
+            <fx:reference source="LabelCh11" />
+            <fx:reference source="LabelCh12" />
+            <fx:reference source="LabelCh13" />
+            <fx:reference source="LabelCh14" />
+            <fx:reference source="LabelCh15" />
+            <fx:reference source="LabelCh16" />
+            <fx:reference source="LabelCh17" />
+            <fx:reference source="LabelCh18" />
+            <fx:reference source="LabelCh19" />
+            <fx:reference source="LabelCh20" />
+            <fx:reference source="LabelCh21" />
+            <fx:reference source="LabelCh22" />
+            <fx:reference source="LabelCh23" />
+            <fx:reference source="LabelCh24" />
+            <fx:reference source="LabelCh25" />
+            <fx:reference source="LabelCh26" />
+            <fx:reference source="LabelCh27" />
+            <fx:reference source="LabelCh28" />
+            <fx:reference source="LabelCh29" />
+            <fx:reference source="LabelCh30" />
+            <fx:reference source="LabelCh31" />
+            <fx:reference source="LabelCh32" />
+            <fx:reference source="LabelCh33" />
+            <fx:reference source="LabelCh34" />
+            <fx:reference source="LabelCh35" />
+            <fx:reference source="LabelCh36" />
+            <fx:reference source="LabelCh37" />
+            <fx:reference source="LabelCh38" />
+            <fx:reference source="LabelCh39" />
+            <fx:reference source="LabelCh40" />
+            <fx:reference source="LabelCh41" />
+            <fx:reference source="LabelCh42" />
+            <fx:reference source="LabelCh43" />
+            <fx:reference source="LabelCh44" />
+            <fx:reference source="LabelCh45" />
+            <fx:reference source="LabelCh46" />
+            <fx:reference source="LabelCh47" />
+            <fx:reference source="LabelCh48" />
+            <fx:reference source="LabelCh49" />
+            <fx:reference source="LabelCh50" />
+            <fx:reference source="LabelCh51" />
+            <fx:reference source="LabelCh52" />
+            <fx:reference source="LabelCh53" />
+            <fx:reference source="LabelCh54" />
+            <fx:reference source="LabelCh55" />
+            <fx:reference source="LabelCh56" />
+            <fx:reference source="LabelCh57" />
+            <fx:reference source="LabelCh58" />
+            <fx:reference source="LabelCh59" />
+            <fx:reference source="LabelCh60" />
+            <fx:reference source="LabelCh61" />
+            <fx:reference source="LabelCh62" />
+            <fx:reference source="LabelCh63" />
+            <fx:reference source="LabelCh64" />
         </ArrayList>
     </fx:define>      
                
     <fx:define>         
-        <ArrayList fx:id="SelectedChannelList" >
-            <fx:reference source="Channel1"/>
-            <fx:reference source="Channel2"/>
-            <fx:reference source="Channel3"/>
-            <fx:reference source="Channel4"/>
-            <fx:reference source="Channel5"/>
-            <fx:reference source="Channel6"/>
-            <fx:reference source="Channel7"/>
-            <fx:reference source="Channel8"/>
-            <fx:reference source="Channel9"/>
-            <fx:reference source="Channel10"/>
-            <fx:reference source="Channel11"/>
-            <fx:reference source="Channel12"/>
-            <fx:reference source="Channel13"/>
-            <fx:reference source="Channel14"/>
-            <fx:reference source="Channel15"/>
-            <fx:reference source="Channel16"/>
-            <fx:reference source="Channel17"/>
-            <fx:reference source="Channel18"/>
-            <fx:reference source="Channel19"/>
-            <fx:reference source="Channel20"/>
-            <fx:reference source="Channel21"/>
-            <fx:reference source="Channel22"/>
-            <fx:reference source="Channel23"/>
-            <fx:reference source="Channel24"/>
-            <fx:reference source="Channel25"/>
-            <fx:reference source="Channel26"/>
-            <fx:reference source="Channel27"/>
-            <fx:reference source="Channel28"/>
-            <fx:reference source="Channel29"/>
-            <fx:reference source="Channel30"/>
-            <fx:reference source="Channel31"/>
-            <fx:reference source="Channel32"/>
-            <fx:reference source="Channel33"/>
-            <fx:reference source="Channel34"/>
-            <fx:reference source="Channel35"/>
-            <fx:reference source="Channel36"/>
-            <fx:reference source="Channel37"/>
-            <fx:reference source="Channel38"/>
-            <fx:reference source="Channel39"/>
-            <fx:reference source="Channel40"/>
-            <fx:reference source="Channel41"/>
-            <fx:reference source="Channel42"/>
-            <fx:reference source="Channel43"/>
-            <fx:reference source="Channel44"/>
-            <fx:reference source="Channel45"/>      
-            <fx:reference source="Channel46"/>
-            <fx:reference source="Channel47"/>
-            <fx:reference source="Channel48"/> 
-            <fx:reference source="Channel49"/>    
-            <fx:reference source="Channel50"/>
-            <fx:reference source="Channel51"/>
-            <fx:reference source="Channel52"/>
-            <fx:reference source="Channel53"/>    
-            <fx:reference source="Channel54"/>    
-            <fx:reference source="Channel55"/>     
-            <fx:reference source="Channel56"/>      
-            <fx:reference source="Channel57"/>
-            <fx:reference source="Channel58"/>     
-            <fx:reference source="Channel59"/> 
-            <fx:reference source="Channel60"/>
-            <fx:reference source="Channel61"/>
-            <fx:reference source="Channel62"/>
-            <fx:reference source="Channel63"/> 
-            <fx:reference source="Channel64"/>      
+        <ArrayList fx:id="SelectedChannelList">
+            <fx:reference source="Channel1" />
+            <fx:reference source="Channel2" />
+            <fx:reference source="Channel3" />
+            <fx:reference source="Channel4" />
+            <fx:reference source="Channel5" />
+            <fx:reference source="Channel6" />
+            <fx:reference source="Channel7" />
+            <fx:reference source="Channel8" />
+            <fx:reference source="Channel9" />
+            <fx:reference source="Channel10" />
+            <fx:reference source="Channel11" />
+            <fx:reference source="Channel12" />
+            <fx:reference source="Channel13" />
+            <fx:reference source="Channel14" />
+            <fx:reference source="Channel15" />
+            <fx:reference source="Channel16" />
+            <fx:reference source="Channel17" />
+            <fx:reference source="Channel18" />
+            <fx:reference source="Channel19" />
+            <fx:reference source="Channel20" />
+            <fx:reference source="Channel21" />
+            <fx:reference source="Channel22" />
+            <fx:reference source="Channel23" />
+            <fx:reference source="Channel24" />
+            <fx:reference source="Channel25" />
+            <fx:reference source="Channel26" />
+            <fx:reference source="Channel27" />
+            <fx:reference source="Channel28" />
+            <fx:reference source="Channel29" />
+            <fx:reference source="Channel30" />
+            <fx:reference source="Channel31" />
+            <fx:reference source="Channel32" />
+            <fx:reference source="Channel33" />
+            <fx:reference source="Channel34" />
+            <fx:reference source="Channel35" />
+            <fx:reference source="Channel36" />
+            <fx:reference source="Channel37" />
+            <fx:reference source="Channel38" />
+            <fx:reference source="Channel39" />
+            <fx:reference source="Channel40" />
+            <fx:reference source="Channel41" />
+            <fx:reference source="Channel42" />
+            <fx:reference source="Channel43" />
+            <fx:reference source="Channel44" />
+            <fx:reference source="Channel45" />      
+            <fx:reference source="Channel46" />
+            <fx:reference source="Channel47" />
+            <fx:reference source="Channel48" /> 
+            <fx:reference source="Channel49" />    
+            <fx:reference source="Channel50" />
+            <fx:reference source="Channel51" />
+            <fx:reference source="Channel52" />
+            <fx:reference source="Channel53" />    
+            <fx:reference source="Channel54" />    
+            <fx:reference source="Channel55" />     
+            <fx:reference source="Channel56" />      
+            <fx:reference source="Channel57" />
+            <fx:reference source="Channel58" />     
+            <fx:reference source="Channel59" /> 
+            <fx:reference source="Channel60" />
+            <fx:reference source="Channel61" />
+            <fx:reference source="Channel62" />
+            <fx:reference source="Channel63" /> 
+            <fx:reference source="Channel64" />      
         </ArrayList>
     </fx:define>
     <!--         
