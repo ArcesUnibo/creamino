@@ -1,4 +1,4 @@
-1) Use the Java Interface
+1) How to use the Java Interface
 
 In order to use the Java Interface you go on creamino\SW\CreaminoJavaInterface\dist 
 Then double click on CreaminoJavaInterface.jar file. The interface appears.
@@ -12,7 +12,7 @@ EEG signals or to use the autogenerate test signals from the ADS1298.
 For further information on how to configure ADS1298 please read http://www.ti.com/product/ADS1298 
 
 
-2) Modify the Java Interface as you want
+2) How to modify the Java Interface as you want
 
 In order to modify the interface you have to download Netbeans from here:
 https://netbeans.org/downloads/
