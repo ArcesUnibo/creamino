@@ -43,7 +43,7 @@ namespace SerialLibrary
 
 				char lpValueName[256];
 				DWORD lpcchValueName;
-				byte lpData[256];
+				BYTE lpData[256];
 				DWORD lpcbData;
 				DWORD result;
 				for (DWORD i = 0; i < keysCount; i++) {
@@ -444,14 +444,14 @@ namespace SerialLibrary
 	* portHandle - port handle
 	* byteCount - count of bytes for reading
 	*/
-	vector<byte> SerialLib::readBytes(HANDLE portHandle, int byteCount) {
+	vector<BYTE> SerialLib::readBytes(HANDLE portHandle, int byteCount) {
 
 		HANDLE hComm = (HANDLE)portHandle;
 		DWORD lpNumberOfBytesTransferred;
 		DWORD lpNumberOfBytesRead;
 		OVERLAPPED *overlapped = new OVERLAPPED();
 		BOOL fWaitingOnRead = FALSE;
-		vector<byte>  lpBuffer(byteCount);
+		vector<BYTE>  lpBuffer(byteCount);
 		//byte* lpBuffer2 = (byte*)malloc(byteCount*sizeof(byte));
 		overlapped->hEvent = CreateEventA(NULL, true, false, NULL);
 		fWaitingOnRead = ReadFile(hComm, &lpBuffer[0], (DWORD)byteCount, &lpNumberOfBytesRead, overlapped);
@@ -473,7 +473,7 @@ namespace SerialLibrary
 	* portHandle - port handle
 	* buffer - byte array for sending
 	*/
-	bool  SerialLib::writeBytes(HANDLE portHandle, vector<byte> &buffer, int lenght) {
+	bool  SerialLib::writeBytes(HANDLE portHandle, vector<BYTE> &buffer, int lenght) {
 		HANDLE hComm = (HANDLE)portHandle;
 		DWORD lpNumberOfBytesTransferred;
 		DWORD lpNumberOfBytesWritten;

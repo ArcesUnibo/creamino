@@ -2,7 +2,7 @@
 //CreaminoLib.h
 
 #pragma once
-#include "../SerialLib/SerialLib.h"
+#include "SerialLib.h"
 #include <Windows.h>
 #include <iostream>
 #include <vector>
@@ -13,13 +13,15 @@ using namespace std;
 
 #define CREAMINO_NO_ERROR 0
 
-#define ADS_OUTPUTDATA_8KSPS	0x00
-#define ADS_OUTPUTDATA_4KSPS	0x01
-#define ADS_OUTPUTDATA_2KSPS	0x02
-#define ADS_OUTPUTDATA_1KSPS	0x03
-#define ADS_OUTPUTDATA_500SPS	0x04
-#define ADS_OUTPUTDATA_250SPS	0x05
-#define ADS_OUTPUTDATA_125SPS	0x06
+
+
+#define ADS_OUTPUTDATA_32KSPS	0x00
+#define ADS_OUTPUTDATA_16KSPS	0x01
+#define ADS_OUTPUTDATA_8KSPS	0x02
+#define ADS_OUTPUTDATA_4KSPS	0x03
+#define ADS_OUTPUTDATA_2KSPS	0x04
+#define ADS_OUTPUTDATA_1KSPS	0x05
+#define ADS_OUTPUTDATA_500SPS	0x06
 
 #define CH8		 8
 #define CH16	16
@@ -44,10 +46,10 @@ using namespace std;
 namespace CreaminoLibrary
 {
 
-	static float INF[7][CH32];
-	static float OUTF[7][CH32];
-	static float INF_Notch[7][CH32];
-	static float OUTF_Notch[7][CH32];
+	static float INF[7][CH64];
+	static float OUTF[7][CH64];
+	static float INF_Notch[7][CH64];
+	static float OUTF_Notch[7][CH64];
 
 	static float NF[7];
 	static float NF_Notch[7];
@@ -65,7 +67,7 @@ namespace CreaminoLibrary
 		* Method:   StartADS
 		*/
 
-		static bool StartADS(string COMPort, byte ADSSampleRate, int ChannelsNumber);
+		static bool StartADS(string COMPort, BYTE ADSSampleRate, int ChannelsNumber, BYTE ADSMode, BYTE ADSNum, BYTE ChipSelect, BYTE Gain);
 
 		/*
 		* Class:    CreaminoLibrary
@@ -89,7 +91,7 @@ namespace CreaminoLibrary
 		* Class:    CreaminoLibrary
 		* Method:   CreaminoStart
 		*/
-		static int CreaminoStart(string COMPort, byte ADSSampleRate, int ChannelsNumber);
+		static int CreaminoStart(string COMPort, BYTE ADSSampleRate, int ChannelsNumber, BYTE ADSMode, BYTE ADSNum, BYTE ChipSelect, BYTE Gain);
 
 		/*
 		* Class:    CreaminoLibrary
@@ -114,6 +116,13 @@ namespace CreaminoLibrary
 		* Method:   ResetNotchFilter
 		*/
 		static void ResetNotchFilter();
+
+		/*
+		* Class:    CreaminoLibrary
+		* Method:   NoFilter
+		*/
+		static void NoFilter();
+
 
 		/*
 		* Class:    CreaminoLibrary

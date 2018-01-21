@@ -103,13 +103,13 @@ namespace SerialLibrary
 		* Class:     SerialLibrary
 		* Method:    readBytes
 		*/
-		static vector<byte> readBytes(HANDLE, int);
+		static vector<BYTE> readBytes(HANDLE, int);
 
 		/*
 		* Class:     SerialLibrary
 		* Method:    writeBytes
 		*/
-		static bool writeBytes(HANDLE, vector<byte> &, int);
+		static bool writeBytes(HANDLE, vector<BYTE> &, int);
 
 		/*
 		* Class:     SerialLibrary
