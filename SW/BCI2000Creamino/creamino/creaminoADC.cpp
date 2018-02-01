@@ -51,7 +51,7 @@ CreaminoADC::~CreaminoADC()
 }
 
 void
-CreaminoADC::OnPublish()
+CreaminoADC::Publish()
 {
   // Declare any parameters that the filter needs....
 	//cout << "pippo" << '\n';
@@ -75,8 +75,8 @@ CreaminoADC::OnPublish()
 	   "% % // Gain for  each channel",
 	 "Source:Signal%20Properties: string COMport= COM17 "
 	   "COM17 0 % // COMport for CreaminoAmp",
-    "Source:Signal%20Properties int MyAmpSetting= 4 "
-       "% % // some user setting specific to your amp",
+    "Source:Signal%20Properties int ChipSelect= 4 "
+       "4 0 % // Chip Select Pin",
 
  END_PARAMETER_DEFINITIONS
 
@@ -133,7 +133,7 @@ CreaminoADC::OnTrigger( int trigger )
 }
 
 void
-CreaminoADC::OnAutoConfig()
+CreaminoADC::AutoConfig( const SignalProperties& )
 {
   // The user has pressed "Set Config" and some parameters may be set to "auto",
   // indicating that they should be set from the current amplifier configuration.
@@ -186,7 +186,7 @@ CreaminoADC::OnAutoConfig()
 }
 
 void
-CreaminoADC::OnPreflight( SignalProperties& Output ) const
+CreaminoADC::Preflight(const SignalProperties&, SignalProperties& Output) const
 {
   // The user has pressed "Set Config" and we need to sanity-check everything.
   // For example, check that all necessary parameters and states are accessible:
@@ -228,7 +228,7 @@ CreaminoADC::OnPreflight( SignalProperties& Output ) const
 }
 
 void
-CreaminoADC::OnInitialize( const SignalProperties& Output )
+CreaminoADC::Initialize(const SignalProperties&, const SignalProperties& Output)
 {
   // The user has pressed "Set Config" and all Preflight checks have passed.
   // The system will now transition into an "Initialized" state.
@@ -255,30 +255,82 @@ CreaminoADC::OnInitialize( const SignalProperties& Output )
   double samplesPerSecond = Parameter( "SamplingRate" );
   double samplesPerBlock  = Parameter( "SampleBlockSize" );
   
-  Buffer = (float*)malloc(samplesPerBlock*CH8 * sizeof(float));
-  NotchWord = (float*)malloc(samplesPerBlock*CH8 * sizeof(float));
-  FilteredWord = (float*)malloc(samplesPerBlock*CH8 * sizeof(float));
+  Buffer = (float*)malloc(samplesPerBlock*Output.Channels() * sizeof(float));
+  NotchWord = (float*)malloc(samplesPerBlock*Output.Channels() * sizeof(float));
+  FilteredWord = (float*)malloc(samplesPerBlock*Output.Channels() * sizeof(float));
 
 
   
-  CreaminoLibrary::CreaminoLib::SetNotchFilter();
+  CreaminoLibrary::CreaminoLib::ResetNotchFilter();
   CreaminoLibrary::CreaminoLib::IIR_05_20_500SPS();
+
   cout << "samplesPerSecond = " <<dec<< samplesPerSecond << '\n';
   cout << "samplesPerBlock = " <<dec<< samplesPerBlock << '\n';
   cout << "channels = " << dec << Output.Channels() << '\n';
-  cout << "Output.Elements()" << dec << Output.Elements() << '\n';
-
+  
   cout << "Connected = " << Connected << '\n';
+
+  string COMport = Parameter("COMport");
+  int sampleRate = Parameter("SamplingRate");
+  int blockSize = Parameter("SampleBlockSize");
+  int numberOfChannels = Parameter("SourceCh");
+  int ChipSelect = Parameter("ChipSelect");
+
+  cout << "COMPort = " << dec << COMport << '\n';
+  cout << "sampleRate = " << dec << sampleRate << '\n';
+  cout << "blockSize = " << dec << blockSize << '\n';
+  cout << "Number of Channels = " << dec << numberOfChannels << '\n';
+
+  byte ADS_samplerate;
+
+  switch (sampleRate)
+  {
+  case 500:
+	  cout << "Sample Rate 500Hz \n";
+	  ADS_samplerate = ADS_OUTPUTDATA_500SPS;
+	  break;
+  case 1000:
+	  cout << "Sample Rate 1KHz \n";
+	  ADS_samplerate = ADS_OUTPUTDATA_1KSPS;
+	  break;
+  case 2000:
+	  cout << "Sample Rate 2KHz \n";
+	  ADS_samplerate = ADS_OUTPUTDATA_2KSPS;
+	  break;
+  case 4000:
+	  cout << "Sample Rate 4KHz \n";
+	  ADS_samplerate = ADS_OUTPUTDATA_4KSPS;
+	  break;
+  case 8000:
+	  cout << "Sample Rate 8KHz \n";
+	  ADS_samplerate = ADS_OUTPUTDATA_8KSPS;
+	  break;
+  default:
+	  cout << "Sample rate not supported. Device setted to 500Hz";
+	  ADS_samplerate = ADS_OUTPUTDATA_500SPS;
+	  break;
+  }
+
+
+  cout << "OnStartAcquisition()" << '\n';
+  if (Connected == false) {
+	  int init = CreaminoLibrary::CreaminoLib::CreaminoStart(COMport, ADS_samplerate, numberOfChannels, 0x05, 0x01, ChipSelect, 0x10);
+	  Connected = true;
+  }
+
+  bciout << "Connected = " << Connected << '\n';
+  
 }
 
 void
-CreaminoADC::OnStartAcquisition()
+CreaminoADC::StartRun()
 {
   // This method is called from the acquisition thread once the system is initialized.
   // You should use this space to start up your amplifier using its API.  Any initialization
   // here is done in the acquisition thread, so non-thread-safe APIs should work if initialized here.
   CALL_AMP_API( StartAcquisition );
   CALL_AMP_API( SetTriggerCallback( &TriggerCallback, this ) );
+  /*
   string COMport = Parameter("COMport");
   int sampleRate = Parameter("SamplingRate");
   int blockSize = Parameter("SampleBlockSize");
@@ -327,11 +379,12 @@ CreaminoADC::OnStartAcquisition()
 	}
 
 	bciout << "Connected = " << Connected << '\n';
-	Sleep(5000);
+	//Sleep(5000);
+	*/
 }
 
 void
-CreaminoADC::DoAcquire( GenericSignal& Output )
+CreaminoADC::Process(const GenericSignal&, GenericSignal& Output)
 {
   // Now we're acquiring a single SampleBlock of data in the acquisition thread, which is stored
   // in an internal buffer until the main thread is ready to process it.
@@ -413,6 +466,7 @@ CreaminoADC::DoAcquire( GenericSignal& Output )
 
   // Call the amplifier API's function for synchronous data transfer here.
   int response = CreaminoLibrary::CreaminoLib::CreaminoWaitforData(Buffer, Output.Elements());
+	
   //AMP_API_SYNC_GET_DATA( mpBuffer );
   //const float* pSignalData = reinterpret_cast<float*>( mpBuffer );
   // Copy values from raw buffer into output signal.
@@ -422,7 +476,7 @@ CreaminoADC::DoAcquire( GenericSignal& Output )
     {
       // Check the amplifier's documentation whether data are sent in
       // channel-major or sample-major format.
-      Output( ch, sample ) = Buffer[ch + sample * mNumberOfSignalChannels];
+		Output(ch, sample) = Buffer[ch + sample * mNumberOfSignalChannels] / 1e-4;
 	  // When getting garbage, try this instead:
        //Output( ch, el ) = pSignalData[el + ch * Output.Elements()];
     }
@@ -438,7 +492,7 @@ CreaminoADC::DoAcquire( GenericSignal& Output )
 }
 
 void
-CreaminoADC::OnStopAcquisition()
+CreaminoADC::Halt()
 {
   // This method is called from the acquisition thread just before it exits.  Use this method
   // to shut down the amplifier API (undoing whatever was done in OnStartAcquisition).
@@ -446,8 +500,11 @@ CreaminoADC::OnStopAcquisition()
   // OnHalt will be called in the main thread.
   CALL_AMP_API( StopAcquisition );
   CALL_AMP_API( RemoveTriggerCallback );
-  Connected = false;
-  int init = CreaminoLibrary::CreaminoLib::CreaminoStop();
+  if(Connected == true){
+	int init = CreaminoLibrary::CreaminoLib::CreaminoStop();
+	Connected = false;
+  }
+  else {/**/}
   //ThreadUtils::SleepFor(1000);
   bciout << "Connected = " << Connected << '\n';
 }

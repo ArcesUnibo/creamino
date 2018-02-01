@@ -11,18 +11,19 @@
 #include <Windows.h>
 #include "CreaminoLib.h"
 
-class CreaminoADC : public BufferedADC
+class CreaminoADC : public GenericADC
 {
  public:
   CreaminoADC();
   ~CreaminoADC();
-  void OnPublish() override;
-  void OnAutoConfig() override;
-  void OnPreflight( SignalProperties& Output ) const override;
-  void OnInitialize( const SignalProperties& Output ) override;
-  void OnStartAcquisition() override;
-  void DoAcquire( GenericSignal& Output ) override;
-  void OnStopAcquisition() override;
+
+  void Publish();
+  void AutoConfig(const SignalProperties&);
+  void Preflight(const SignalProperties&, SignalProperties&) const;
+  void Initialize(const SignalProperties&, const SignalProperties&);
+  void StartRun();
+  void Process(const GenericSignal&, GenericSignal&);
+  void Halt();
 
   void OnTrigger( int ); // for asynchronous triggers only
 
