@@ -13,7 +13,8 @@ using namespace std;
 
 #define CREAMINO_NO_ERROR 0
 
-
+#define ADS_NORMALMODE 0x00
+#define ADS_TESTMODE   0x05
 
 #define ADS_OUTPUTDATA_32KSPS	0x00
 #define ADS_OUTPUTDATA_16KSPS	0x01
@@ -31,6 +32,14 @@ using namespace std;
 #define CH48	48
 #define CH56	56
 #define CH64	64
+
+#define ADS_GAIN_1	0x10
+#define ADS_GAIN_2	0x20
+#define ADS_GAIN_3	0x30
+#define ADS_GAIN_4	0x40
+#define ADS_GAIN_6	0x00
+#define ADS_GAIN_8	0x50
+#define ADS_GAIN_12	0x60
 
 #define DISABLE_EVENTS  0
 #define MASK_RXCHAR		1

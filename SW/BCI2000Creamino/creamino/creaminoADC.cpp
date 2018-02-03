@@ -77,6 +77,10 @@ CreaminoADC::Publish()
 	   "COM17 0 % // COMport for CreaminoAmp",
     "Source:Signal%20Properties int ChipSelect= 4 "
        "4 0 % // Chip Select Pin",
+	 "Source:Signal%20Properties int Gain= 1 "
+		"1 0 % // ADS Gain",
+	 "Source:Signal%20Properties string Mode= Test "
+	 "1 0 % // ADS Mode (Test,Normal)",
 
  END_PARAMETER_DEFINITIONS
 
@@ -275,11 +279,15 @@ CreaminoADC::Initialize(const SignalProperties&, const SignalProperties& Output)
   int blockSize = Parameter("SampleBlockSize");
   int numberOfChannels = Parameter("SourceCh");
   int ChipSelect = Parameter("ChipSelect");
+  int Gain = Parameter("Gain");
+  string Mode = Parameter("Mode");
 
   cout << "COMPort = " << dec << COMport << '\n';
   cout << "sampleRate = " << dec << sampleRate << '\n';
   cout << "blockSize = " << dec << blockSize << '\n';
   cout << "Number of Channels = " << dec << numberOfChannels << '\n';
+  
+  byte ADSNum = (byte)(numberOfChannels / 8);
 
   byte ADS_samplerate;
 
@@ -306,15 +314,62 @@ CreaminoADC::Initialize(const SignalProperties&, const SignalProperties& Output)
 	  ADS_samplerate = ADS_OUTPUTDATA_8KSPS;
 	  break;
   default:
-	  cout << "Sample rate not supported. Device setted to 500Hz";
+	  cout << "Sample rate not supported. Sample rate set to 500Hz";
 	  ADS_samplerate = ADS_OUTPUTDATA_500SPS;
 	  break;
   }
 
+  byte ADS_Gain;
+
+  switch (Gain)
+  {
+  case 1:
+	  cout << "ADS Gain = 1 \n";
+	  ADS_Gain = ADS_GAIN_1;
+	  break;
+  case 2:
+	  cout << "ADS Gain = 1 \n";
+	  ADS_Gain = ADS_GAIN_2;
+	  break;
+  case 3:
+	  cout << "ADS Gain = 1 \n";
+	  ADS_Gain = ADS_GAIN_3;
+	  break;
+  case 4:
+	  cout << "ADS Gain = 1 \n";
+	  ADS_Gain = ADS_GAIN_4;
+	  break;
+  case 6:
+	  cout << "ADS Gain = 1 \n";
+	  ADS_Gain = ADS_GAIN_6;
+	  break;
+  case 8:
+	  cout << "ADS Gain = 1 \n";
+	  ADS_Gain = ADS_GAIN_8;
+	  break;
+  case 12:
+	  cout << "ADS Gain = 1 \n";
+	  ADS_Gain = ADS_GAIN_12;
+	  break;
+  default:
+	  cout << "ADS Gain not supported. Gain set to 1";
+	  ADS_samplerate = ADS_OUTPUTDATA_500SPS;
+	  break;
+  }
+
+  byte ADS_Mode;
+
+  if (Mode == "Test")
+	  ADS_Mode = ADS_TESTMODE;
+  else if (Mode == "Normal")
+	  ADS_Mode = ADS_NORMALMODE;
+  else
+	  ADS_Mode = ADS_NORMALMODE;
+
 
   cout << "OnStartAcquisition()" << '\n';
   if (Connected == false) {
-	  int init = CreaminoLibrary::CreaminoLib::CreaminoStart(COMport, ADS_samplerate, numberOfChannels, 0x05, 0x01, ChipSelect, 0x10);
+	  int init = CreaminoLibrary::CreaminoLib::CreaminoStart(COMport, ADS_samplerate, numberOfChannels, ADS_Mode, ADSNum, ChipSelect, ADS_Gain);
 	  Connected = true;
   }
 
