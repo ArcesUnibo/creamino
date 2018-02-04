@@ -78,9 +78,14 @@ public class FXMLDocumentController implements Initializable {
     Stage stageReference;
     ReferenceController ReferenceCtrl;
     
+    Parent rootCalibration;
+    Stage stageCalibration;
+    CalibrationController CalibrationCtrl;
+    
     public static int AVAC;
   
     public int CH[] = new int[MAXCHANNELS];
+    public double Cal[] = new double[MAXCHANNELS];
     public int SelectedCHList_tmp[] = new int[MAXCHANNELS];
     public String CHLabel[] = new String[MAXCHANNELS];
     private SerialCommunication SerialCOM;
@@ -144,6 +149,13 @@ public class FXMLDocumentController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        try {
+            initCalibration();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         //Initial Condition
         
@@ -754,6 +766,12 @@ public class FXMLDocumentController implements Initializable {
     private void handleMenuItemReference(ActionEvent event) throws IOException {
         stageReference.show();
     }
+   
+   @FXML
+    private void handleMenuItemCalibration(ActionEvent event) throws IOException {
+        stageCalibration.show();
+    }
+    
     
     @FXML
     private void handleMenuItemSaveLabels(ActionEvent event) throws IOException {
@@ -925,6 +943,33 @@ public class FXMLDocumentController implements Initializable {
         stageReference.setTitle("Set Reference");
         stageReference.setScene(new Scene(rootReference));  
         
+    }
+    
+    private void initCalibration() throws IOException{
+        
+        fxmlLoader = new FXMLLoader(getClass().getResource("Calibration.fxml"));
+        fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
+            @Override
+            public Object call(Class<?> controllerClass) {
+                if (controllerClass == CalibrationController.class) {
+                    CalibrationCtrl = new CalibrationController();
+                    Cal = CalibrationCtrl.getValue();
+                    return CalibrationCtrl ;
+                } else {
+                    try {
+                        return controllerClass.newInstance();
+                    } catch (Exception exc) {
+                        throw new RuntimeException(exc); // just bail
+                    }
+                }
+            }
+        });
+        
+        rootCalibration = (Parent) fxmlLoader.load();
+        stageCalibration = new Stage();
+        stageCalibration.setTitle("Set Calibration");
+        stageCalibration.setScene(new Scene(rootCalibration));  
+       
     }
     
 }

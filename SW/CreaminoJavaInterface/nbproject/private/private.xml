@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/WORK/creamino/SW/CreaminoJavaInterface/src/Filter/DigitalFilter.java</file>
             <file>file:/C:/WORK/creamino/SW/CreaminoJavaInterface/src/creaminointerface/FXMLDocumentController.java</file>
+            <file>file:/C:/WORK/creamino/SW/CreaminoJavaInterface/src/creaminointerface/CreaminoInterface.java</file>
             <file>file:/C:/WORK/creamino/SW/CreaminoJavaInterface/src/SerialPort/SerialCommunication.java</file>
+            <file>file:/C:/WORK/creamino/SW/CreaminoJavaInterface/src/creaminointerface/FXMLDocument.fxml</file>
         </group>
     </open-files>
 </project-private>

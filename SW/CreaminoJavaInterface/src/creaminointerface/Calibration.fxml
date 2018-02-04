@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.util.*?>
+
+<!--
+<fx:root type="javafx.scene.layout.AnchorPane" id="AnchorPane" prefHeight="490.0" prefWidth="1072.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arduinojavainterface.LabelController">
+-->
+
+<AnchorPane id="AnchorPane" prefHeight="490.0" prefWidth="1072.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creaminointerface.CalibrationController">
+   <children>
+      <Label fx:id="CH1" layoutX="35.0" layoutY="32.0" prefHeight="21.0" prefWidth="48.0" text="CH1" />
+      <Label fx:id="CH2" layoutX="162.0" layoutY="32.0" prefHeight="21.0" prefWidth="48.0" text="CH2" />
+      <Label fx:id="CH3" layoutX="289.0" layoutY="32.0" prefHeight="21.0" prefWidth="48.0" text="CH3" />
+      <Label fx:id="CH4" layoutX="416.0" layoutY="32.0" prefHeight="21.0" prefWidth="48.0" text="CH4" />
+      <Label fx:id="CH5" layoutX="543.0" layoutY="32.0" prefHeight="21.0" prefWidth="48.0" text="CH5" />
+      <Label fx:id="CH6" layoutX="671.0" layoutY="32.0" prefHeight="21.0" prefWidth="48.0" text="CH6" />
+      <Label fx:id="CH7" layoutX="798.0" layoutY="32.0" prefHeight="21.0" prefWidth="48.0" text="CH7" />
+      <Label fx:id="CH8" layoutX="925.0" layoutY="32.0" prefHeight="21.0" prefWidth="48.0" text="CH8" />
+      <Label fx:id="CH9" layoutX="35.0" layoutY="79.0" prefHeight="21.0" prefWidth="48.0" text="CH9" />
+      <Label fx:id="CH10" layoutX="162.0" layoutY="79.0" prefHeight="21.0" prefWidth="48.0" text="CH10" />
+      <Label fx:id="CH11" layoutX="289.0" layoutY="79.0" prefHeight="21.0" prefWidth="48.0" text="CH11" />
+      <Label fx:id="CH12" layoutX="416.0" layoutY="79.0" prefHeight="21.0" prefWidth="48.0" text="CH12" />
+      <Label fx:id="CH13" layoutX="543.0" layoutY="79.0" prefHeight="21.0" prefWidth="48.0" text="CH13" />
+      <Label fx:id="CH14" layoutX="671.0" layoutY="79.0" prefHeight="21.0" prefWidth="48.0" text="CH14" />
+      <Label fx:id="CH15" layoutX="798.0" layoutY="79.0" prefHeight="21.0" prefWidth="48.0" text="CH15" />
+      <Label fx:id="CH16" layoutX="925.0" layoutY="79.0" prefHeight="21.0" prefWidth="48.0" text="CH16" />
+      <Label fx:id="CH17" layoutX="35.0" layoutY="126.0" prefHeight="21.0" prefWidth="48.0" text="CH17" />
+      <Label fx:id="CH18" layoutX="162.0" layoutY="126.0" prefHeight="21.0" prefWidth="48.0" text="CH18" />
+      <Label fx:id="CH19" layoutX="289.0" layoutY="126.0" prefHeight="21.0" prefWidth="48.0" text="CH19" />
+      <Label fx:id="CH20" layoutX="416.0" layoutY="126.0" prefHeight="21.0" prefWidth="48.0" text="CH20" />
+      <Label fx:id="CH21" layoutX="543.0" layoutY="126.0" prefHeight="21.0" prefWidth="48.0" text="CH21" />
+      <Label fx:id="CH22" layoutX="671.0" layoutY="126.0" prefHeight="21.0" prefWidth="48.0" text="CH22" />
+      <Label fx:id="CH23" layoutX="798.0" layoutY="126.0" prefHeight="21.0" prefWidth="48.0" text="CH23" />
+      <Label fx:id="CH24" layoutX="925.0" layoutY="126.0" prefHeight="21.0" prefWidth="48.0" text="CH24" />
+      <Label fx:id="CH25" layoutX="35.0" layoutY="173.0" prefHeight="21.0" prefWidth="48.0" text="CH25" />
+      <Label fx:id="CH26" layoutX="162.0" layoutY="173.0" prefHeight="21.0" prefWidth="48.0" text="CH26" />
+      <Label fx:id="CH27" layoutX="289.0" layoutY="173.0" prefHeight="21.0" prefWidth="48.0" text="CH27" />
+      <Label fx:id="CH28" layoutX="416.0" layoutY="173.0" prefHeight="21.0" prefWidth="48.0" text="CH28" />
+      <Label fx:id="CH29" layoutX="543.0" layoutY="173.0" prefHeight="21.0" prefWidth="48.0" text="CH29" />
+      <Label fx:id="CH30" layoutX="671.0" layoutY="173.0" prefHeight="21.0" prefWidth="48.0" text="CH30" />
+      <Label fx:id="CH31" layoutX="798.0" layoutY="173.0" prefHeight="21.0" prefWidth="48.0" text="CH31" />
+      <Label fx:id="CH32" layoutX="925.0" layoutY="173.0" prefHeight="21.0" prefWidth="48.0" text="CH32" />
+      <Label fx:id="CH33" layoutX="35.0" layoutY="220.0" prefHeight="21.0" prefWidth="48.0" text="CH33" />
+      <Label fx:id="CH34" layoutX="162.0" layoutY="220.0" prefHeight="21.0" prefWidth="48.0" text="CH34" />
+      <Label fx:id="CH35" layoutX="289.0" layoutY="220.0" prefHeight="21.0" prefWidth="48.0" text="CH35" />
+      <Label fx:id="CH36" layoutX="416.0" layoutY="220.0" prefHeight="21.0" prefWidth="48.0" text="CH36" />
+      <Label fx:id="CH37" layoutX="543.0" layoutY="220.0" prefHeight="21.0" prefWidth="48.0" text="CH37" />
+      <Label fx:id="CH38" layoutX="671.0" layoutY="220.0" prefHeight="21.0" prefWidth="48.0" text="CH38" />
+      <Label fx:id="CH39" layoutX="798.0" layoutY="220.0" prefHeight="21.0" prefWidth="48.0" text="CH39" />
+      <Label fx:id="CH40" layoutX="925.0" layoutY="220.0" prefHeight="21.0" prefWidth="48.0" text="CH40" />
+      <Label fx:id="CH41" layoutX="35.0" layoutY="267.0" prefHeight="21.0" prefWidth="48.0" text="CH41" />
+      <Label fx:id="CH42" layoutX="162.0" layoutY="267.0" prefHeight="21.0" prefWidth="48.0" text="CH42" />
+      <Label fx:id="CH43" layoutX="289.0" layoutY="267.0" prefHeight="21.0" prefWidth="48.0" text="CH43" />
+      <Label fx:id="CH44" layoutX="416.0" layoutY="267.0" prefHeight="21.0" prefWidth="48.0" text="CH44" />
+      <Label fx:id="CH45" layoutX="543.0" layoutY="267.0" prefHeight="21.0" prefWidth="48.0" text="CH45" />
+      <Label fx:id="CH46" layoutX="671.0" layoutY="267.0" prefHeight="21.0" prefWidth="48.0" text="CH46" />
+      <Label fx:id="CH47" layoutX="798.0" layoutY="267.0" prefHeight="21.0" prefWidth="48.0" text="CH47" />
+      <Label fx:id="CH48" layoutX="925.0" layoutY="267.0" prefHeight="21.0" prefWidth="48.0" text="CH48" />
+      <Label fx:id="CH49" layoutX="35.0" layoutY="314.0" prefHeight="21.0" prefWidth="48.0" text="CH49" />
+      <Label fx:id="CH50" layoutX="162.0" layoutY="314.0" prefHeight="21.0" prefWidth="48.0" text="CH50" />
+      <Label fx:id="CH51" layoutX="289.0" layoutY="314.0" prefHeight="21.0" prefWidth="48.0" text="CH51" />
+      <Label fx:id="CH52" layoutX="416.0" layoutY="314.0" prefHeight="21.0" prefWidth="48.0" text="CH52" />
+      <Label fx:id="CH53" layoutX="543.0" layoutY="314.0" prefHeight="21.0" prefWidth="48.0" text="CH53" />
+      <Label fx:id="CH54" layoutX="671.0" layoutY="314.0" prefHeight="21.0" prefWidth="48.0" text="CH54" />
+      <Label fx:id="CH55" layoutX="798.0" layoutY="314.0" prefHeight="21.0" prefWidth="48.0" text="CH55" />
+      <Label fx:id="CH56" layoutX="925.0" layoutY="314.0" prefHeight="21.0" prefWidth="48.0" text="CH56" />
+      <Label fx:id="CH57" layoutX="35.0" layoutY="361.0" prefHeight="21.0" prefWidth="48.0" text="CH57" />
+      <Label fx:id="CH58" layoutX="162.0" layoutY="361.0" prefHeight="21.0" prefWidth="48.0" text="CH58" />
+      <Label fx:id="CH59" layoutX="289.0" layoutY="361.0" prefHeight="21.0" prefWidth="48.0" text="CH59" />
+      <Label fx:id="CH60" layoutX="416.0" layoutY="361.0" prefHeight="21.0" prefWidth="48.0" text="CH60" />
+      <Label fx:id="CH61" layoutX="543.0" layoutY="361.0" prefHeight="21.0" prefWidth="48.0" text="CH61" />
+      <Label fx:id="CH62" layoutX="671.0" layoutY="361.0" prefHeight="21.0" prefWidth="48.0" text="CH62" />
+      <Label fx:id="CH63" layoutX="798.0" layoutY="361.0" prefHeight="21.0" prefWidth="48.0" text="CH63" />
+      <Label fx:id="CH64" layoutX="925.0" layoutY="361.0" prefHeight="21.0" prefWidth="48.0" text="CH64" />
+      
+      
+            
+      <TextField fx:id="CalCH1" layoutX="73.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0"  text="1.0" />
+      <TextField fx:id="CalCH2" layoutX="200.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH3" layoutX="327.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH4" layoutX="454.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH5" layoutX="581.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH6" layoutX="709.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH7" layoutX="836.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH8" layoutX="963.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH9" layoutX="73.0" layoutY="74.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH10" layoutX="200.0" layoutY="74.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH11" layoutX="327.0" layoutY="74.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH12" layoutX="454.0" layoutY="74.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH13" layoutX="581.0" layoutY="74.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH14" layoutX="709.0" layoutY="74.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH15" layoutX="836.0" layoutY="74.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH16" layoutX="963.0" layoutY="74.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH17" layoutX="73.0" layoutY="121.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH18" layoutX="200.0" layoutY="121.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH19" layoutX="327.0" layoutY="121.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH20" layoutX="454.0" layoutY="121.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH21" layoutX="581.0" layoutY="121.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH22" layoutX="709.0" layoutY="121.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH23" layoutX="836.0" layoutY="121.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH24" layoutX="963.0" layoutY="121.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH25" layoutX="73.0" layoutY="168.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH26" layoutX="200.0" layoutY="168.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH27" layoutX="327.0" layoutY="168.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH28" layoutX="454.0" layoutY="168.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH29" layoutX="581.0" layoutY="168.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH30" layoutX="709.0" layoutY="168.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH31" layoutX="836.0" layoutY="168.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH32" layoutX="963.0" layoutY="168.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH33" layoutX="73.0" layoutY="215.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH34" layoutX="200.0" layoutY="215.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH35" layoutX="327.0" layoutY="215.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH36" layoutX="454.0" layoutY="215.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH37" layoutX="581.0" layoutY="215.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH38" layoutX="709.0" layoutY="215.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH39" layoutX="836.0" layoutY="215.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH40" layoutX="963.0" layoutY="215.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH41" layoutX="73.0" layoutY="262.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH42" layoutX="200.0" layoutY="262.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH43" layoutX="327.0" layoutY="262.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH44" layoutX="454.0" layoutY="262.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH45" layoutX="581.0" layoutY="262.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH46" layoutX="709.0" layoutY="262.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH47" layoutX="836.0" layoutY="262.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH48" layoutX="963.0" layoutY="262.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH49" layoutX="73.0" layoutY="309.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH50" layoutX="200.0" layoutY="309.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH51" layoutX="327.0" layoutY="309.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH52" layoutX="454.0" layoutY="309.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH53" layoutX="581.0" layoutY="309.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH54" layoutX="709.0" layoutY="309.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH55" layoutX="836.0" layoutY="309.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH56" layoutX="963.0" layoutY="309.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH57" layoutX="73.0" layoutY="356.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH58" layoutX="200.0" layoutY="356.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH59" layoutX="327.0" layoutY="356.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH60" layoutX="454.0" layoutY="356.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH61" layoutX="581.0" layoutY="356.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH62" layoutX="709.0" layoutY="356.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH63" layoutX="836.0" layoutY="356.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <TextField fx:id="CalCH64" layoutX="963.0" layoutY="356.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
+      <Button fx:id="SaveCalibration" layoutX="894.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleSaveCalibration" prefHeight="31.0" prefWidth="139.0" text="Save" />
+    <!-- use a define block to define an array list containing the labels: -->
+    
+      <fx:define>
+        <ArrayList fx:id="CalibrationList">
+            <fx:reference source="CalCH1" />
+            <fx:reference source="CalCH2" /> 
+            <fx:reference source="CalCH3" />
+            <fx:reference source="CalCH4" /> 
+            <fx:reference source="CalCH5" />
+            <fx:reference source="CalCH6" /> 
+            <fx:reference source="CalCH7" />
+            <fx:reference source="CalCH8" /> 
+            <fx:reference source="CalCH9" />
+            <fx:reference source="CalCH10" /> 
+            <fx:reference source="CalCH11" />
+            <fx:reference source="CalCH12" /> 
+            <fx:reference source="CalCH13" />
+            <fx:reference source="CalCH14" /> 
+            <fx:reference source="CalCH15" />
+            <fx:reference source="CalCH16" /> 
+            <fx:reference source="CalCH17" />
+            <fx:reference source="CalCH18" /> 
+            <fx:reference source="CalCH19" />
+            <fx:reference source="CalCH20" />
+            <fx:reference source="CalCH21" />
+            <fx:reference source="CalCH22" /> 
+            <fx:reference source="CalCH23" />
+            <fx:reference source="CalCH24" /> 
+            <fx:reference source="CalCH25" />
+            <fx:reference source="CalCH26" /> 
+            <fx:reference source="CalCH27" />
+            <fx:reference source="CalCH28" /> 
+            <fx:reference source="CalCH29" />
+            <fx:reference source="CalCH30" />
+            <fx:reference source="CalCH31" />
+            <fx:reference source="CalCH32" /> 
+            <fx:reference source="CalCH33" />
+            <fx:reference source="CalCH34" /> 
+            <fx:reference source="CalCH35" />
+            <fx:reference source="CalCH36" /> 
+            <fx:reference source="CalCH37" />
+            <fx:reference source="CalCH38" /> 
+            <fx:reference source="CalCH39" />
+            <fx:reference source="CalCH40" />
+            <fx:reference source="CalCH41" />
+            <fx:reference source="CalCH42" /> 
+            <fx:reference source="CalCH43" />
+            <fx:reference source="CalCH44" /> 
+            <fx:reference source="CalCH45" />
+            <fx:reference source="CalCH46" /> 
+            <fx:reference source="CalCH47" />
+            <fx:reference source="CalCH48" /> 
+            <fx:reference source="CalCH49" />
+            <fx:reference source="CalCH50" />
+            <fx:reference source="CalCH51" />
+            <fx:reference source="CalCH52" /> 
+            <fx:reference source="CalCH53" />
+            <fx:reference source="CalCH54" /> 
+            <fx:reference source="CalCH55" />
+            <fx:reference source="CalCH56" /> 
+            <fx:reference source="CalCH57" />
+            <fx:reference source="CalCH58" /> 
+            <fx:reference source="CalCH59" />
+            <fx:reference source="CalCH60" />  
+            <fx:reference source="CalCH61" />
+            <fx:reference source="CalCH62" /> 
+            <fx:reference source="CalCH63" />
+            <fx:reference source="CalCH64" /> 
+            
+        </ArrayList>
+    </fx:define>
+    
+    <fx:define>
+        <ArrayList fx:id="CalibrationLabel">
+            <fx:reference source="CH1" />
+            <fx:reference source="CH2" /> 
+            <fx:reference source="CH3" />
+            <fx:reference source="CH4" /> 
+            <fx:reference source="CH5" />
+            <fx:reference source="CH6" /> 
+            <fx:reference source="CH7" />
+            <fx:reference source="CH8" /> 
+            <fx:reference source="CH9" />
+            <fx:reference source="CH10" /> 
+            <fx:reference source="CH11" />
+            <fx:reference source="CH12" /> 
+            <fx:reference source="CH13" />
+            <fx:reference source="CH14" /> 
+            <fx:reference source="CH15" />
+            <fx:reference source="CH16" /> 
+            <fx:reference source="CH17" />
+            <fx:reference source="CH18" /> 
+            <fx:reference source="CH19" />
+            <fx:reference source="CH20" />
+            <fx:reference source="CH21" />
+            <fx:reference source="CH22" /> 
+            <fx:reference source="CH23" />
+            <fx:reference source="CH24" /> 
+            <fx:reference source="CH25" />
+            <fx:reference source="CH26" /> 
+            <fx:reference source="CH27" />
+            <fx:reference source="CH28" /> 
+            <fx:reference source="CH29" />
+            <fx:reference source="CH30" />
+            <fx:reference source="CH31" />
+            <fx:reference source="CH32" /> 
+            <fx:reference source="CH33" />
+            <fx:reference source="CH34" /> 
+            <fx:reference source="CH35" />
+            <fx:reference source="CH36" /> 
+            <fx:reference source="CH37" />
+            <fx:reference source="CH38" /> 
+            <fx:reference source="CH39" />
+            <fx:reference source="CH40" />
+            <fx:reference source="CH41" />
+            <fx:reference source="CH42" /> 
+            <fx:reference source="CH43" />
+            <fx:reference source="CH44" /> 
+            <fx:reference source="CH45" />
+            <fx:reference source="CH46" /> 
+            <fx:reference source="CH47" />
+            <fx:reference source="CH48" /> 
+            <fx:reference source="CH49" />
+            <fx:reference source="CH50" />
+            <fx:reference source="CH51" />
+            <fx:reference source="CH52" /> 
+            <fx:reference source="CH53" />
+            <fx:reference source="CH54" /> 
+            <fx:reference source="CH55" />
+            <fx:reference source="CH56" /> 
+            <fx:reference source="CH57" />
+            <fx:reference source="CH58" /> 
+            <fx:reference source="CH59" />
+            <fx:reference source="CH60" />  
+            <fx:reference source="CH61" />
+            <fx:reference source="CH62" /> 
+            <fx:reference source="CH63" />
+            <fx:reference source="CH64" /> 
+            
+        </ArrayList>
+    </fx:define>
+    
+    
+   </children>
+</AnchorPane>

@@ -150,6 +150,7 @@
                     <Menu mnemonicParsing="false" text="Set">
                         <items>
                             <MenuItem fx:id="Reference" mnemonicParsing="false" onAction="#handleMenuItemReference" text="Reference" />
+                            <MenuItem fx:id="Calibration" mnemonicParsing="false" onAction="#handleMenuItemCalibration" text="Calibration" />
                             <MenuItem fx:id="SaveLabel" mnemonicParsing="false" onAction="#handleMenuItemSaveLabels" text="Save Labels" />
                             <MenuItem fx:id="LoadLabel" mnemonicParsing="false" onAction="#handleMenuItemLoadLabels" text="Load Labels" />
                         </items>
