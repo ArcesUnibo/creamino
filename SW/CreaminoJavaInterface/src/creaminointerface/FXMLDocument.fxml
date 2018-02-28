@@ -254,7 +254,7 @@
                                     </Label>
                                     <TitledPane layoutX="1.0" layoutY="78.0" prefHeight="335.0" prefWidth="188.0" text="EEG Setting">
                                         <content>
-                                            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="170.0">
+                                            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="367.0" prefWidth="186.0">
                                                 <children>
                                                     <ChoiceBox fx:id="ModeADSBox" layoutY="80.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="70.0">
                                                         <items>
@@ -372,7 +372,7 @@
                                                             <Font size="10.0" />
                                                         </font>
                                                     </Label>
-                                                    <TextField fx:id="OutputFileText" layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="140.0" />
+                                                    <TextField fx:id="OutputFileText" layoutY="258.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="140.0" />
                                                     <Label alignment="CENTER" layoutY="152.0" prefHeight="20.0" prefWidth="70.0" text="Y Scale">
                                                         <font>
                                                             <Font size="10.0" />
@@ -401,11 +401,17 @@
                                                             </FXCollections>
                                                         </items>
                                                     </ChoiceBox>
-                                                    <Label alignment="CENTER" layoutY="235.0" prefHeight="20.0" prefWidth="140.0" text="OutputFile" textAlignment="CENTER">
+                                                    <Label alignment="CENTER" layoutY="242.0" prefHeight="20.0" prefWidth="140.0" text="OutputFile" textAlignment="CENTER">
                                                         <font>
                                                             <Font size="10.0" />
                                                         </font>
                                                     </Label>
+                                          <Label alignment="CENTER" layoutY="285.0" prefHeight="20.0" prefWidth="140.0" text="Calibration" textAlignment="CENTER">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="CalibrationFileText" layoutY="303.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="140.0" />
                                                 </children>
                                             </AnchorPane>
                                         </content>

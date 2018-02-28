@@ -115,7 +115,7 @@ public class FXMLDocumentController implements Initializable {
     private Button ConnectButton;
     
     @FXML
-    private TextField OutputFileText, DutyCycleText;
+    private TextField OutputFileText, CalibrationFileText;
     
     @FXML
     public CheckMenuItem Connect, Channels1_8, Channels9_16, Channels17_24, Channels25_32, Channels33_40, Channels41_48, Channels49_56, Channels57_64, full_size;
@@ -607,7 +607,7 @@ public class FXMLDocumentController implements Initializable {
         if(Connect.isSelected()){     
             
             if(SerialCOM.StartADS(SelectedPort)){
-                SerialCOM.initialize(OutputFileText.getText(), SelectedPort);
+                SerialCOM.initialize(OutputFileText.getText(), SelectedPort, CalibrationFileText.getText());
                 Connect.setSelected(true);
                 ConnectButton.setText("Disconnect");
                 ChannelsBox.setDisable(true);
@@ -643,7 +643,7 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonConnect(ActionEvent event) {
             if(!Connect.isSelected()){                        
             if(SerialCOM.StartADS(SelectedPort)){
-                SerialCOM.initialize(OutputFileText.getText(), SelectedPort);
+                SerialCOM.initialize(OutputFileText.getText(), SelectedPort, CalibrationFileText.getText());
                 Connect.setSelected(true);
                 ConnectButton.setText("Disconnect");
                 ChannelsBox.setDisable(true);
@@ -953,7 +953,6 @@ public class FXMLDocumentController implements Initializable {
             public Object call(Class<?> controllerClass) {
                 if (controllerClass == CalibrationController.class) {
                     CalibrationCtrl = new CalibrationController();
-                    Cal = CalibrationCtrl.getValue();
                     return CalibrationCtrl ;
                 } else {
                     try {

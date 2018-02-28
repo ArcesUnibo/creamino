@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="CreaminoJavaInterface.jar" size="43988" download="eager" />
+    <jar href="CreaminoJavaInterface.jar" size="44808" download="eager" />
     <jar href="lib\aquafx-0.1.jar" size="408524" download="eager" />
     <jar href="lib\jssc-2.8.0.jar" size="153562" download="eager" />
   </resources>

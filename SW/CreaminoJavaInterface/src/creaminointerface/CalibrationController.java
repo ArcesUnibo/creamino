@@ -36,6 +36,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
@@ -45,19 +47,19 @@ import java.io.PrintWriter;
  */
 public class CalibrationController extends AnchorPane implements Initializable {
 
-    public final double[] Cal = new double[64];
-
     @FXML
     public static Button SaveCalibration;
     
     @FXML
-    private TextField CalCH1;
+    private TextField Saveas_textfield;
  
     @FXML
     public List<TextField> CalibrationList;
     
     @FXML
     public List<Label> CalibrationLabel;
+    
+    String fileName = "Calibration.csv";
     
     public CalibrationController(){
         
@@ -68,18 +70,28 @@ public class CalibrationController extends AnchorPane implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) { 
-        for(int i=0;i<64;i++){
-             Cal[i] = 1.0;
-         }
+
     }    
     
     @FXML
     private void handleSaveCalibration(ActionEvent event) throws FileNotFoundException{
-         
-        PrintWriter pw = new PrintWriter(new File("Calibration.csv"));
+        
+        PrintWriter pw;
+        try {
+            if(!Saveas_textfield.getText().equals("")){
+                pw = new PrintWriter(new File(Saveas_textfield.getText() + ".csv"));
+            }
+            else{
+                pw = new PrintWriter(new File("Calibration.csv"));
+            }
+        } catch(IOException e) {
+            System.err.println(e);
+            pw = new PrintWriter(new File("Calibration.csv"));
+        }
+        
+        //PrintWriter pw = new PrintWriter(new File("Calibration.csv"));
         StringBuilder sb = new StringBuilder();
         for(int i=0;i<64;i++){
-             Cal[i] = Double.parseDouble(CalibrationList.get(i).getText());
              sb.append(CalibrationLabel.get(i).getText());
              sb.append(';');
              sb.append(CalibrationList.get(i).getText());
@@ -90,10 +102,6 @@ public class CalibrationController extends AnchorPane implements Initializable {
         System.out.println("done!");  
     } 
     
-
-     public double[] getValue(){
-       return Cal;
-   } 
      
      
 }

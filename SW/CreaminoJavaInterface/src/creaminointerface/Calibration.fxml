@@ -79,7 +79,7 @@
       
       
             
-      <TextField fx:id="CalCH1" layoutX="73.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0"  text="1.0" />
+      <TextField fx:id="CalCH1" layoutX="73.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
       <TextField fx:id="CalCH2" layoutX="200.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
       <TextField fx:id="CalCH3" layoutX="327.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
       <TextField fx:id="CalCH4" layoutX="454.0" layoutY="27.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
@@ -143,7 +143,9 @@
       <TextField fx:id="CalCH62" layoutX="709.0" layoutY="356.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
       <TextField fx:id="CalCH63" layoutX="836.0" layoutY="356.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
       <TextField fx:id="CalCH64" layoutX="963.0" layoutY="356.0" prefHeight="31.0" prefWidth="73.0" text="1.0" />
-      <Button fx:id="SaveCalibration" layoutX="894.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleSaveCalibration" prefHeight="31.0" prefWidth="139.0" text="Save" />
+      <Button fx:id="SaveCalibration" layoutX="894.0" layoutY="425.0" mnemonicParsing="false" onAction="#handleSaveCalibration" prefHeight="31.0" prefWidth="139.0" text="Save" />
+      <TextField fx:id="Saveas_textfield" layoutX="720.0" layoutY="425.0" prefHeight="31.0" prefWidth="139.0" />
+      <Label fx:id="Saveas_Label" alignment="CENTER" layoutX="728.0" layoutY="404.0" prefHeight="21.0" prefWidth="122.0" text="Save as" textAlignment="JUSTIFY" />
     <!-- use a define block to define an array list containing the labels: -->
     
       <fx:define>

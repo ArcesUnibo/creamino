@@ -25,7 +25,10 @@ package SerialPort;
 
 import Filter.DigitalFilter;
 import creaminointerface.FXMLDocumentController;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,6 +72,8 @@ public class SerialCommunication implements SerialPortEventListener{
    public double[] Word = new double[FXMLDocumentController.MAXCHANNELS];
    public double[] NotchWord = new double[FXMLDocumentController.MAXCHANNELS];
    public double[] FilteredWord = new double[FXMLDocumentController.MAXCHANNELS];
+   private static double[] Cal = new double[FXMLDocumentController.MAXCHANNELS];
+           
    private int GraphCount = 0;
    private int lenght, DataLength, GraphUpdateCycles;
    private FileOutputStream outputStream;
@@ -86,7 +91,8 @@ public class SerialCommunication implements SerialPortEventListener{
    private final FXMLDocumentController Controller; 
    private final Timeline animation;
    private static int Remove;
-    
+   
+   
    private Node chartArea;
    private Bounds chartAreaBounds;
    private double RefactorMovableLine;
@@ -167,8 +173,15 @@ public class SerialCommunication implements SerialPortEventListener{
      * @param SelectedPort****************************************************/    
     
 // Initialization -- Open the Native USB port and the output file
-    public void initialize(String TextField, String SelectedPort){
-       //Create the output stream to save the data;
+    public void initialize(String TextField, String SelectedPort, String CalibrationFile){
+      
+        String csvFile = "Calibration.csv";
+        File f = new File(csvFile);
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ";";
+        int j = 0;
+        //Create the output stream to save the data;
         try {
             if(!TextField.equals("")){
                outputStream = new FileOutputStream(TextField + ".bin");
@@ -179,6 +192,41 @@ public class SerialCommunication implements SerialPortEventListener{
         } catch(IOException e) {
             System.err.println(e);
         }
+        
+        try {
+            if(CalibrationFile.equals("")){
+                if(f.exists() && f.isDirectory()){
+                    br = new BufferedReader(new FileReader(csvFile));
+                    while ((line = br.readLine()) != null) {
+                        // use comma as separator
+                        String[] Calibration = line.split(cvsSplitBy);
+                        Cal[j] = Double.parseDouble(Calibration[1]);
+                        System.out.println("Calibration[" + j + "] = " + Cal[j]);
+                        j++;
+                    }
+                }
+                else{
+                    for(j=0;j<FXMLDocumentController.MAXCHANNELS;j++)
+                        Cal[j]=1.0;
+                }
+            }
+            else{
+                br = new BufferedReader(new FileReader(CalibrationFile));
+               while ((line = br.readLine()) != null) {
+
+                   // use comma as separator
+                    String[] Calibration = line.split(cvsSplitBy);
+                    Cal[j] = Double.parseDouble(Calibration[1]);
+                    System.out.println("Calibration[" + j + "] = " + Cal[j]);
+                    j++;
+               }
+            }
+        } catch(IOException e) {
+            System.err.println(e);
+        }
+        
+        
+        
        //Initialize the serial port
        serialPort = new SerialPort(SelectedPort);
         
@@ -304,7 +352,7 @@ public class SerialCommunication implements SerialPortEventListener{
                                         if (FXMLDocumentController.ADSType == 1)
                                             Word[i] = (2*2.4*(-(65536-((0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)])*256+(0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)+1])+1))/65536.0/FXMLDocumentController.AVAC/PGA))/Controller.scaleY;//
                                         else                                               
-                                            Word[i] = (2*2.4*(-(16777216-((0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)])*65536+(0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)+1])*256+(0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)+2])+1))/16777216.0/FXMLDocumentController.AVAC/PGA))/Controller.scaleY;
+                                            Word[i] = (2*2.4*(-(16777216-((0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)])*65536+(0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)+1])*256+(0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)+2])+1))/1677721.0/FXMLDocumentController.AVAC/PGA))/Controller.scaleY;
                                     } else {
                                         if (FXMLDocumentController.ADSType == 1)
                                             Word[i] = (2*2.4*((0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)])*256+(0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)+1]))/65536.0/FXMLDocumentController.AVAC/PGA)/Controller.scaleY; //
@@ -312,7 +360,7 @@ public class SerialCommunication implements SerialPortEventListener{
                                             Word[i] = (2*2.4*((0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)])*65536+(0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)+1])*256+(0xFF&DataBuffer[(i*FXMLDocumentController.bytesPerChannel)+2]))/16777216.0/FXMLDocumentController.AVAC/PGA)/Controller.scaleY; //                                        
                                     }
                                     
-                                    NotchWord[i] = IIR.NotchFilteredWord(i, Word[i]);
+                                    NotchWord[i] = IIR.NotchFilteredWord(i, Word[i])*Cal[i];
                                     FilteredWord[i] = IIR.FilteredWord(i, NotchWord[i]); 
                                     REF += Controller.CH[i]*FilteredWord[i];
                                 }
