@@ -2,6 +2,8 @@ function [Word] = CreaminoWaitForData(inCount)
 
 global s;
 global CHnum;
+global Cal;
+global BufferSize;
 %inCount is the number of byte that must be read in a single time step of
 %the simulation
 
@@ -10,7 +12,7 @@ global CHnum;
     timeout = 0;
     
     %Word = zeros(1,inCount);
-    Word = zeros(inCount,CHnum);
+    Word = zeros(BufferSize,CHnum);
     
     AvailableBytes = s.BytesAvailable;
   
@@ -28,15 +30,15 @@ global CHnum;
     
     Buffer = fread(s,BufferByte,'uchar');
 
-    for j=0:1:(inCount-1) 
+    for j=0:1:(BufferSize-1) 
        for i=1:1:CHnum
            %if (Buffer(j*(CHnum*2+2) + (i*2)) > 127)
            if (Buffer(j*(CHnum*3+2) + (i*3)-1) > 127)
                %Word(j+1,i) = (2 * 2.4*(-(65536 - (Buffer(j*(CHnum*2+2) + ((i*2)-1))*256 + Buffer(j*(CHnum*2+2) + (i*2)) + 1)) / 65536.0 / 47 / 1e-6));
- 			   Word(j+1,i) =  2*2.4*(-(16777216-(Buffer(j*(CHnum*3+2) + ((i*3)-1))*65536+Buffer(j*(CHnum*3+2) + (i*3))*256+Buffer(j*(CHnum*3+2) + (i*3)+1))+1))/16777216/1/1e-6;               %Word(j*CHnum + i) = (2 * 2.4*(-(65536 - (Buffer(j*(CHnum*2+2) + ((i*2)-1))*256 + Buffer(j*(CHnum*2+2) + (i*2)) + 1)) / 65536.0 / 47 / 1));
+ 			   Word(j+1,i) =  2*2.4*(-(16777216-(Buffer(j*(CHnum*3+2) + ((i*3)-1))*65536+Buffer(j*(CHnum*3+2) + (i*3))*256+Buffer(j*(CHnum*3+2) + (i*3)+1))+1))/16777216/1/1e-6*Cal(i);               %Word(j*CHnum + i) = (2 * 2.4*(-(65536 - (Buffer(j*(CHnum*2+2) + ((i*2)-1))*256 + Buffer(j*(CHnum*2+2) + (i*2)) + 1)) / 65536.0 / 47 / 1));
            else
                %Word(j+1,i) = (2 * 2.4*(Buffer(j*(CHnum*2+2) +((i*2)-1))*256 + Buffer(j*(CHnum*2+2) + i*2)) / 65536.0 / 47 / 1e-6);
-               Word(j+1,i) =  2*2.4*(((Buffer(j*(CHnum*3+2) + ((i*3)-1))*65536+Buffer(j*(CHnum*3+2) + (i*3))*256+Buffer(j*(CHnum*3+2) + (i*3)+1))+1))/16777216/1/1e-6;               %Word(j*CHnum + i) = (2 * 2.4*(-(65536 - (Buffer(j*(CHnum*2+2) + ((i*2)-1))*256 + Buffer(j*(CHnum*2+2) + (i*2)) + 1)) / 65536.0 / 47 / 1));
+               Word(j+1,i) =  2*2.4*(((Buffer(j*(CHnum*3+2) + ((i*3)-1))*65536+Buffer(j*(CHnum*3+2) + (i*3))*256+Buffer(j*(CHnum*3+2) + (i*3)+1))+1))/16777216/1/1e-6*Cal(i);               %Word(j*CHnum + i) = (2 * 2.4*(-(65536 - (Buffer(j*(CHnum*2+2) + ((i*2)-1))*256 + Buffer(j*(CHnum*2+2) + (i*2)) + 1)) / 65536.0 / 47 / 1));
            end
        end
 

@@ -61,8 +61,8 @@ function setup(block)
   block.OutputPort(1).SamplingMode = 'sample';
   
   % Register the parameters.
-  block.NumDialogPrms     = 7;
-  block.DialogPrmsTunable = {'Nontunable','Nontunable','SimOnlyTunable','Tunable','Nontunable','Tunable','Tunable'}; % Values can be Nontunable, Tunable, SimOnlyTunable
+  block.NumDialogPrms     = 8;
+  block.DialogPrmsTunable = {'Nontunable','Nontunable','SimOnlyTunable','Tunable','Nontunable','Tunable','Tunable','Nontunable'}; % Values can be Nontunable, Tunable, SimOnlyTunable
   
   % Set up the continuous states.
   block.NumContStates = 0;
@@ -382,6 +382,24 @@ function CheckPrms(block)
     me = MSLException(block.BlockHandle, message('Simulink:blocks:invalidParameter'));
     throw(me);
   end
+  
+  %Calibration File
+  global Cal;
+  if exist(block.DialogPrm(8).Data, 'file') == 2
+    range_end = num2str(CHnum);
+    range = strcat('B1:B',range_end);
+    [~,Cal_tmp] = xlsread(block.DialogPrm(8).Data,1,range);
+    Cal = str2num(cell2mat(Cal_tmp));
+    if ~ischar(block.DialogPrm(8).Data)
+        me = MSLException(block.BlockHandle, message('Simulink:blocks:invalidParameter'));
+        throw(me);
+    end
+  else
+      for j=1:1:CHnum 
+          Cal(j) = 1.0;
+      end
+  end
+   
 %endfunction
     
 %endfunction
