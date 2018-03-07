@@ -43,6 +43,11 @@ Put the source files that you can find in C:/WORK/creamino/SW/BCI2000/creamino/s
 in your local repository:
 [BCI2000-repository]/src/custom/creamino/ 
 
+Put the Calibration file (Calibration.csv) that you can find in C:/WORK/creamino/SW/BCI2000/creamino/src
+in your local repository:
+[BCI2000-repository]/prog 
+
+
 NOTE: Run CMake again to ensure that this module is included in the build.
 
 To expand the new module, edit the following files:

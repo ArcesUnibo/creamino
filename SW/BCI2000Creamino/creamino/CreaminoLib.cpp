@@ -5,6 +5,7 @@
 #include <fstream>
 
 
+
 using namespace std;
 
 namespace CreaminoLibrary {
@@ -14,6 +15,7 @@ namespace CreaminoLibrary {
 	ofstream outputStream;
 	static HANDLE Port;
 	static int ChNum;
+	static double Cal[CH64];
 	
 	bool CreaminoLib::StartADS(string COMPort, BYTE ADSSampleRate, int ChannelsNumber, BYTE ADSMode, BYTE ADSNum, BYTE ChipSelect, BYTE Gain)
 	{
@@ -104,9 +106,36 @@ namespace CreaminoLibrary {
 	}
 
 
-	bool CreaminoLib::Initialize(string FileName, string COMPort) {
+	bool CreaminoLib::Initialize(string FileName, string COMPort, string CalibrationFile) {
 
 		int msgboxID;
+		string Channel;
+		string Value;
+		int i = 0;
+		ifstream ip(CalibrationFile);
+
+		std::cout << "Nome File "<< CalibrationFile << '\n';
+		if (!ip.is_open()) std::cout << "Error opening File" << '\n';
+
+		for (i = 0; i < CH64; i++) {
+			Cal[i] = 1.0;
+		}
+		//reset counter
+		i = 0;
+
+		while (ip.good()) {
+			getline(ip, Channel, ';');
+			getline(ip, Value, '\n');
+
+
+			Cal[i] = atof((Value).c_str());
+
+			std::cout << "Channel Name = " << Channel << '\t';
+			std::cout << "Value = " << Value << '\n';
+			i++;
+		}
+		
+		ip.close();
 
 		outputStream.open("temp.bin", ios::out | ios::binary);
 
@@ -217,10 +246,10 @@ namespace CreaminoLibrary {
 		for (j = 0; j < inCount; j ++){
 			for (i = 0; i < ChNum; i++) {
 				if ((0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3)]) > 127) { 
-					Word[j*ChNum + i] = (float)(2 * 2.4*(-(16777216 - ((0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3)]) * 65536 + (0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3) + 1]) * 256 + (0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3) + 2]) + 1)) / 16777216.0 / 1 / 1));
+					Word[j*ChNum + i] = (float)(2 * 2.4*(-(16777216 - ((0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3)]) * 65536 + (0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3) + 1]) * 256 + (0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3) + 2]) + 1)) / 16777216.0 / 1 / 1))*Cal[i];
 					}
 				else {
-					Word[j*ChNum + i] = (float)(2 * 2.4*((((0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3)]) * 65536 + (0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3) + 1]) * 256 + (0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3) + 2]) + 1)) / 16777216.0 / 1 / 1));
+					Word[j*ChNum + i] = (float)(2 * 2.4*((((0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3)]) * 65536 + (0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3) + 1]) * 256 + (0xFF & Buffer[j*(ChNum * 3 + 2) + (i * 3) + 2]) + 1)) / 16777216.0 / 1 / 1))*Cal[i];
 				}
 			}
 
@@ -288,11 +317,11 @@ namespace CreaminoLibrary {
 	}
 
 
-	int CreaminoLib::CreaminoStart(string COMPort, BYTE ADSSampleRate, int ChannelsNumber, BYTE ADSMode, BYTE ADSNum, BYTE ChipSelect, BYTE Gain) {
+	int CreaminoLib::CreaminoStart(string COMPort, BYTE ADSSampleRate, int ChannelsNumber, BYTE ADSMode, BYTE ADSNum, BYTE ChipSelect, BYTE Gain, string CalibrationFile) {
 
 		bool config = StartADS(COMPort, ADSSampleRate, ChannelsNumber, ADSMode, ADSNum, ChipSelect, Gain);
 		string FileName = "temp.bin";
-		bool init = Initialize(FileName, COMPort);
+		bool init = Initialize(FileName, COMPort, CalibrationFile);
 
 		if (config == true && init == true)
 			return 0;

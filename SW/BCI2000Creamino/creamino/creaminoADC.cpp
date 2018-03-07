@@ -8,6 +8,8 @@
 #include "BCIEvent.h"
 #include <stdio.h>
 #include <sstream>
+#include <fstream>
+#include <iostream>
 
 // In order to help you write a source module, exchange of information
 // between amplifier and the BCI2000 source module is indicated by the use of
@@ -81,6 +83,8 @@ CreaminoADC::Publish()
 		"1 0 % // ADS Gain",
 	 "Source:Signal%20Properties string Mode= Test "
 	 "1 0 % // ADS Mode (Test,Normal)",
+	 "Source:Signal%20Properties string CalibrationFile= Calibration.csv "
+	 "Calibration.csv 0 % // Calibration File (.csv)",
 
  END_PARAMETER_DEFINITIONS
 
@@ -281,12 +285,14 @@ CreaminoADC::Initialize(const SignalProperties&, const SignalProperties& Output)
   int ChipSelect = Parameter("ChipSelect");
   int Gain = Parameter("Gain");
   string Mode = Parameter("Mode");
+  string CalibrationFile = Parameter("CalibrationFile");
 
   cout << "COMPort = " << dec << COMport << '\n';
   cout << "sampleRate = " << dec << sampleRate << '\n';
   cout << "blockSize = " << dec << blockSize << '\n';
   cout << "Number of Channels = " << dec << numberOfChannels << '\n';
-  
+  cout << "Calibration File = " << dec << CalibrationFile << '\n';
+
   byte ADSNum = (byte)(numberOfChannels / 8);
 
   byte ADS_samplerate;
@@ -369,7 +375,7 @@ CreaminoADC::Initialize(const SignalProperties&, const SignalProperties& Output)
 
   cout << "OnStartAcquisition()" << '\n';
   if (Connected == false) {
-	  int init = CreaminoLibrary::CreaminoLib::CreaminoStart(COMport, ADS_samplerate, numberOfChannels, ADS_Mode, ADSNum, ChipSelect, ADS_Gain);
+	  int init = CreaminoLibrary::CreaminoLib::CreaminoStart(COMport, ADS_samplerate, numberOfChannels, ADS_Mode, ADSNum, ChipSelect, ADS_Gain, CalibrationFile);
 	  Connected = true;
   }
 
