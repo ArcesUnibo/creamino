@@ -25,7 +25,7 @@ void CConfigurationGTecGUSBamp::buttonCalibratePressedCB(void)
 _________________________________________________*/
 
 // If you added more reference attribute, initialize them here
-CConfigurationCreamino::CConfigurationCreamino(IDriverContext& rDriverContext, const char* sGtkBuilderFileName, OpenViBE::uint32& rUSBIndex, OpenViBE::CString& COMPort, OpenViBE::uint8& ChipSelect, OpenViBE::uint8& ADSMode, OpenViBE::uint8& Gain)
+CConfigurationCreamino::CConfigurationCreamino(IDriverContext& rDriverContext, const char* sGtkBuilderFileName, OpenViBE::uint32& rUSBIndex, OpenViBE::CString& COMPort, OpenViBE::uint8& ChipSelect, OpenViBE::uint8& ADSMode, OpenViBE::uint8& Gain, OpenViBE::CString& CalibrationFile)
 	:CConfigurationBuilder(sGtkBuilderFileName)
 	,m_rDriverContext(rDriverContext)
 	,m_rUSBIndex(rUSBIndex)
@@ -33,6 +33,7 @@ CConfigurationCreamino::CConfigurationCreamino(IDriverContext& rDriverContext, c
 	,m_COMPort(COMPort)
 	,m_ADSMode(ADSMode)
 	,m_Gain(Gain)
+	,m_CalibrationFile(CalibrationFile)
 {
 	m_pListStore = gtk_list_store_new(1, G_TYPE_STRING);
 }
@@ -51,6 +52,7 @@ bool CConfigurationCreamino::preConfigure(void)
 		return false;
 	}
 
+
 	::GtkComboBox* l_pComboBox = GTK_COMBO_BOX(gtk_builder_get_object(m_pBuilderConfigureInterface, "combobox_device"));
 	
 	g_object_unref(m_pListStore);
@@ -67,6 +69,7 @@ bool CConfigurationCreamino::preConfigure(void)
 	for (int i = 0; i < PortName.size(); i++)
 	{
 #if defined TARGET_OS_Windows
+		//::sprintf(l_sBuffer, "\\\\.\\COM%i", i);
 		::sprintf(l_sBuffer, PortName[i].c_str());
 #elif defined TARGET_OS_Linux
 		if (i<10)
@@ -113,15 +116,15 @@ bool CConfigurationCreamino::postConfigure(void)
 	::GtkComboBox* l_pChipSelect = GTK_COMBO_BOX(gtk_builder_get_object(m_pBuilderConfigureInterface, "combobox_chipselect"));
 	::GtkComboBox* l_pADSMode = GTK_COMBO_BOX(gtk_builder_get_object(m_pBuilderConfigureInterface, "combobox_ADSMode"));
 	::GtkComboBox* l_pGain = GTK_COMBO_BOX(gtk_builder_get_object(m_pBuilderConfigureInterface, "combobox_Gain"));
-
-
+	::GtkEntry* l_pCalibrationFile = GTK_ENTRY(gtk_builder_get_object(m_pBuilderConfigureInterface, "Calibration_name"));
+	
 	if(m_bApplyConfiguration)
 	{
 		int l_iUSBIndex = gtk_combo_box_get_active(l_pComboBox);
 		int l_iChipSelect = gtk_combo_box_get_active(l_pChipSelect);
 		int l_ipADSMode = gtk_combo_box_get_active(l_pADSMode);
 		int l_ipGain = gtk_combo_box_get_active(l_pGain);
-
+		m_CalibrationFile = gtk_entry_get_text(l_pCalibrationFile);
 
 		if (l_iUSBIndex >= 0)
 		{

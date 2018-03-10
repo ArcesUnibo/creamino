@@ -24,6 +24,7 @@ CDriverCreamino::CDriverCreamino(IDriverContext& rDriverContext)
 	, m_ADSNum(uint8(0x01))
 	, m_ADSMode(uint8(0x00))
 	, m_Gain(uint8(0x10))
+	, m_CalibrationFile("Calibration.csv")
 	, m_pSample(NULL)
 	, m_ui32TotalSampleCount(0)
 	, m_ui32StartTime(0)
@@ -37,7 +38,9 @@ CDriverCreamino::CDriverCreamino(IDriverContext& rDriverContext)
 	// The following class allows saving and loading driver settings from the acquisition server .conf file
 	m_oSettings.add("Header", &m_oHeader);
 	// To save your custom driver settings, register each variable to the SettingsHelper
+	//m_oSettings.add("SettingName", &variable);
 	m_oSettings.add("DeviceIdentifier", &m_ui32DeviceIdentifier);
+	//m_oSettings.add("COMPort", &m_COMPort);
 	m_oSettings.load();	
 }
 
@@ -67,7 +70,7 @@ bool CDriverCreamino::initialize(
 	// will be sent to the acquisition
 	// server later...
 	cout << "Number of channels " << m_oHeader.getChannelCount() << '\n';
-	cout << "Sample Count per sent block " << ui32SampleCountPerSentBlock << '\n';
+	cout << "Sample Count per sent block" << ui32SampleCountPerSentBlock << '\n';
 	
 	m_ADSNum = m_oHeader.getChannelCount() / 8;
 	m_OutputBuffer = new float32[m_oHeader.getChannelCount()*ui32SampleCountPerSentBlock];
@@ -110,6 +113,7 @@ bool CDriverCreamino::initialize(
 	cout << "ADS Num : " << unsigned(m_ADSNum) << " \n";
 	cout << "ADS Mode : " << unsigned(m_ADSMode) << " \n";
 	cout << "Gain : " << unsigned(m_Gain) << " \n";
+	cout << "Calibration file : " << m_CalibrationFile << " \n";
 	
 	// Saves parameters
 	m_pCallback=&rCallback;
@@ -133,7 +137,7 @@ bool CDriverCreamino::start(void)
 	CreaminoLibrary::CreaminoLib::NoFilter();
 	CreaminoLibrary::CreaminoLib::IIR_05_65_500SPS();
 
-	int init = CreaminoLibrary::CreaminoLib::CreaminoStart((string)m_COMPort, m_ADS_SampleRate, (unsigned char)m_oHeader.getChannelCount(), m_ADSMode, m_ADSNum, m_ChipSelect, m_Gain);
+	int init = CreaminoLibrary::CreaminoLib::CreaminoStart((string)m_COMPort, m_ADS_SampleRate, (unsigned char)m_oHeader.getChannelCount(), m_ADSMode, m_ADSNum, m_ChipSelect, m_Gain, (string)m_CalibrationFile);
 
 	return true;
 }
@@ -147,17 +151,15 @@ bool CDriverCreamino::loop(void)
 
 	CreaminoLibrary::CreaminoLib::CreaminoWaitforData(m_OutputBuffer, m_ui32SampleCountPerSentBlock);
 	
-	//Uncomment and set the filter if you want to filter the signal
 	/*
 	for (int j = 0; j < m_ui32SampleCountPerSentBlock; j++) 
 		for (int i = 0; i < m_oHeader.getChannelCount(); i++) {
 			m_NotchFilteredWord[i + j*m_oHeader.getChannelCount()] = CreaminoLibrary::CreaminoLib::CreaminoIIR6(i, m_OutputBuffer[i + j*m_oHeader.getChannelCount()]);
-			//m_FilteredWord[i + j*m_oHeader.getChannelCount()] = CreaminoLibrary::CreaminoLib::CreaminoIIR6(i, m_NotchFilteredWord[i + j*m_oHeader.getChannelCount()]);
-//			m_FilteredWord[i + j*m_oHeader.getChannelCount()] = CreaminoLibrary::CreaminoLib::CreaminoIIR6(i, m_NotchFilteredWord[i + j*m_oHeader.getChannelCount()]);
-			//m_pSample[j + i*m_ui32SampleCountPerSentBlock] =  m_FilteredWord[j + i*m_ui32SampleCountPerSentBlock];
+			m_FilteredWord[i + j*m_oHeader.getChannelCount()] = CreaminoLibrary::CreaminoLib::CreaminoIIR6(i, m_NotchFilteredWord[i + j*m_oHeader.getChannelCount()]);
+			m_pSample[j + i*m_ui32SampleCountPerSentBlock] =  m_FilteredWord[j + i*m_ui32SampleCountPerSentBlock];
 	}
 	
-*/
+	*/
 
 
 
@@ -224,8 +226,11 @@ bool CDriverCreamino::isConfigurable(void)
 bool CDriverCreamino::configure(void)
 {
 	// Change this line if you need to specify some references to your driver attribute that need configuration, e.g. the connection ID.
-	CConfigurationCreamino m_oConfiguration(m_rDriverContext, OpenViBE::Directories::getDataDir() + "/applications/acquisition-server/interface-Creamino.ui", m_rUSBIndex, m_COMPort, m_ChipSelect, m_ADSMode, m_Gain);
-	
+	//CConfigurationCreamino m_oConfiguration(m_rDriverContext, OpenViBE::Directories::getDataDir() + "/applications/acquisition-server/interface-Creamino.ui");
+	CConfigurationCreamino m_oConfiguration(m_rDriverContext, OpenViBE::Directories::getDataDir() + "/applications/acquisition-server/interface-Creamino.ui", m_rUSBIndex, m_COMPort, m_ChipSelect, m_ADSMode, m_Gain, m_CalibrationFile);
+	//CConfigurationCreamino m_oConfiguration(OpenViBE::Directories::getDataDir() + "/applications/acquisition-server/interface-Creamino.ui",
+		//m_rDriverContext);
+
 	
 	if(!m_oConfiguration.configure(m_oHeader))
 	{

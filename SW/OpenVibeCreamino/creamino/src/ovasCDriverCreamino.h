@@ -44,7 +44,8 @@ namespace OpenViBEAcquisitionServer
 		virtual bool isFlagSet(
 			const OpenViBEAcquisitionServer::EDriverFlag eFlag) const
 		{
-			return eFlag==DriverFlag_IsUnstable;
+			//return eFlag==DriverFlag_IsUnstable;
+			return eFlag == 1;
 		}
 
 	protected:
@@ -71,6 +72,7 @@ namespace OpenViBEAcquisitionServer
 		OpenViBE::uint8 m_ChipSelect;
 		OpenViBE::uint8 m_ADSMode;
 		OpenViBE::uint8 m_Gain;
+		OpenViBE::CString m_CalibrationFile;
 
 	private:
 

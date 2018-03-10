@@ -37,4 +37,6 @@ http://openvibe.inria.fr/tutorial-creating-a-new-driver-for-the-acquisition-serv
 
 Run once again the command build.cmd --vsbuild-all
 
+Put the file Calibration.csv inside the folder [openvibe-repository]/dist/extras/Release
+
 You are ready to use Creamino inside OpenViBE!

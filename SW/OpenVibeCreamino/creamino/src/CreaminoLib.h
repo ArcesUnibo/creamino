@@ -73,7 +73,7 @@ namespace CreaminoLibrary
 		* Class:    CreaminoLibrary
 		* Method:   Initialize
 		*/
-		static bool Initialize(string FileName, string COMPort);
+		static bool Initialize(string FileName, string COMPort, string CalibrationFile);
 
 		/*
 		* Class:    CreaminoLibrary
@@ -91,7 +91,7 @@ namespace CreaminoLibrary
 		* Class:    CreaminoLibrary
 		* Method:   CreaminoStart
 		*/
-		static int CreaminoStart(string COMPort, BYTE ADSSampleRate, int ChannelsNumber, BYTE ADSMode, BYTE ADSNum, BYTE ChipSelect, BYTE Gain);
+		static int CreaminoStart(string COMPort, BYTE ADSSampleRate, int ChannelsNumber, BYTE ADSMode, BYTE ADSNum, BYTE ChipSelect, BYTE Gain, string CalibrationFile);
 
 		/*
 		* Class:    CreaminoLibrary

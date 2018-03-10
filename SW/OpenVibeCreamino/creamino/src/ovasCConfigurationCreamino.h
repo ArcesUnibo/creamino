@@ -25,7 +25,7 @@ namespace OpenViBEAcquisitionServer
 
 		// you may have to add to your constructor some reference parameters
 		// for example, a connection ID:
-		CConfigurationCreamino(OpenViBEAcquisitionServer::IDriverContext& rDriverContext, const char* sGtkBuilderFileName, OpenViBE::uint32& rUSBIndex, OpenViBE::CString& COMPort, OpenViBE::uint8& ChipSelect, OpenViBE::uint8& ADSMode, OpenViBE::uint8& Gain);
+		CConfigurationCreamino(OpenViBEAcquisitionServer::IDriverContext& rDriverContext, const char* sGtkBuilderFileName, OpenViBE::uint32& rUSBIndex, OpenViBE::CString& COMPort, OpenViBE::uint8& ChipSelect, OpenViBE::uint8& ADSMode, OpenViBE::uint8& Gain, OpenViBE::CString& CalibrationFile );
 		virtual ~CConfigurationCreamino(void);
 
 		virtual bool preConfigure(void);
@@ -40,6 +40,7 @@ namespace OpenViBEAcquisitionServer
 		OpenViBE::uint8& m_ChipSelect;
 		OpenViBE::uint8& m_ADSMode;
 		OpenViBE::uint8& m_Gain;
+		OpenViBE::CString& m_CalibrationFile;
 
 	private:
 

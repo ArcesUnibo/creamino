@@ -1,9 +1,7 @@
 /*Matteo Chiesi - University of Bologna*/
 
-//CreaminoLib.cpp
 #include "CreaminoLib.h"
 #include <fstream>
-
 
 using namespace std;
 
@@ -14,7 +12,8 @@ namespace CreaminoLibrary {
 	ofstream outputStream;
 	static HANDLE Port;
 	static int ChNum;
-	
+	static double Cal[CH64];
+
 	bool CreaminoLib::StartADS(string COMPort, BYTE ADSSampleRate, int ChannelsNumber, BYTE ADSMode, BYTE ADSNum, BYTE ChipSelect, BYTE Gain)
 	{
 
@@ -32,7 +31,6 @@ namespace CreaminoLibrary {
 			for (int i = 0; i < (int)PortName.size(); i++)
 				if (COMPort.compare(PortName[i]) == 0) {
 					Port = SerialLibrary::SerialLib::openPort(COMPort, true);
-	
 					if (!SerialLibrary::SerialLib::setParams(Port, 256000, 8, 0, 0, true, true, 0)) {
 						msgboxID = MessageBox(NULL, "Error during configuration", "Error Message", MB_ICONERROR | MB_OK | MB_DEFBUTTON2);
 						return false;
@@ -104,9 +102,35 @@ namespace CreaminoLibrary {
 	}
 
 
-	bool CreaminoLib::Initialize(string FileName, string COMPort) {
+	bool CreaminoLib::Initialize(string FileName, string COMPort, string CalibrationFile) {
+
 
 		int msgboxID;
+		string Channel;
+		string Value;
+		int i = 0;
+		ifstream ip(CalibrationFile);
+		if (!ip.is_open()) std::cout << "Error opening File" << '\n';
+
+		for (i = 0; i < CH64; i++) {
+			Cal[i] = 1.0;
+		}
+		//reset counter
+		i = 0;
+
+		while (ip.good()) {
+			getline(ip, Channel, ';');
+			getline(ip, Value, '\n');
+
+
+			Cal[i] = atof((Value).c_str());
+
+			std::cout << "Channel Name = " << Channel << '\t';
+			std::cout << "Value = " << Value << '\n';
+			i++;
+		}
+
+		ip.close();
 
 		outputStream.open("temp.bin", ios::out | ios::binary);
 
@@ -172,6 +196,7 @@ namespace CreaminoLibrary {
 				++timeout;
 			}
 
+			//Error message in case of timeout
 			if (timeout == 500) {
 				msgboxID = MessageBox(NULL, "Timeout error during synchronization", "Error Message", MB_ICONERROR | MB_OK | MB_DEFBUTTON2);
 				return false;
@@ -245,7 +270,6 @@ namespace CreaminoLibrary {
 
 		int msgboxID;
 		
-		
 		Sleep(100);
 
 		std::vector<BYTE> DisconnectingWord(10);
@@ -288,11 +312,11 @@ namespace CreaminoLibrary {
 	}
 
 
-	int CreaminoLib::CreaminoStart(string COMPort, BYTE ADSSampleRate, int ChannelsNumber, BYTE ADSMode, BYTE ADSNum, BYTE ChipSelect, BYTE Gain) {
+	int CreaminoLib::CreaminoStart(string COMPort, BYTE ADSSampleRate, int ChannelsNumber, BYTE ADSMode, BYTE ADSNum, BYTE ChipSelect, BYTE Gain, string CalibrationFile) {
 
 		bool config = StartADS(COMPort, ADSSampleRate, ChannelsNumber, ADSMode, ADSNum, ChipSelect, Gain);
 		string FileName = "temp.bin";
-		bool init = Initialize(FileName, COMPort);
+		bool init = Initialize(FileName, COMPort, CalibrationFile);
 
 		if (config == true && init == true)
 			return 0;
@@ -516,3 +540,15 @@ namespace CreaminoLibrary {
 		 }
 
 }
+
+/*
+int ControlFlow = SerialLibrary::SerialLib::getFlowControlMode(Port);
+cout << "ControlFlow " << ControlFlow << "\n";
+ConfigurazioneRiuscita = SerialLibrary::SerialLib::setFlowControlMode(Port, 0);
+ControlFlow = SerialLibrary::SerialLib::getFlowControlMode(Port);
+cout << "ControlFlow " << ControlFlow << "\n";
+std::vector<int> LineStatus(4);
+LineStatus = SerialLibrary::SerialLib::getLinesStatus(Port);
+cout << "Stato Linea " << "CTS " <<LineStatus[0] << "DSR " << LineStatus[1] <<  "RING " << LineStatus[2] << "RLSD " << LineStatus[3] << "\n";
+Sleep(2000);
+*/
